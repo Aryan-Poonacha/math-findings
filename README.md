@@ -4,7 +4,7 @@ Short research notes on open problems in combinatorics, each with a full proof a
 
 | Note | New results | Paper | Check |
 |---|---|---|---|
-| [Integer domination roots](domination-roots/) | −10 is a domination root; integer roots in [−11, −1] are exactly −2, −4, −6, −8, −10; the least order of a graph with root −4 is 13, 14 or 15; root −4 occurs at every order n ≥ 15 | [PDF](domination-roots/paper.pdf) | `python3 -B domination-roots/verify.py` |
+| [Integer domination roots](domination-roots/) | −10 is a domination root, so the integer roots in [−11, −1] are exactly −2, −4, −6, −8, −10; no graph on at most 12 vertices has root −4, so the least order is 13, 14 or 15 | [PDF](domination-roots/paper.pdf) | `python3 -B domination-roots/verify.py` |
 | [Three-move subtraction games](subtraction-games/) | Manabe's Conjecture 52 for all b ≤ 2a, and for all b ≤ 250 with any c (computer-assisted) | [PDF](subtraction-games/paper.pdf) | `python3 -B subtraction-games/verify.py` |
 
 ## How these were produced
