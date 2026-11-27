@@ -7,9 +7,9 @@ Short research notes on open problems in combinatorics, each with a full proof a
 | [Integer domination roots](domination-roots/) | −10 is a domination root, so the integer roots in [−11, −1] are exactly −2, −4, −6, −8, −10; roots −4, −6, −8, −10 together with any multiplicities | [PDF](domination-roots/paper.pdf) | `python3 -B domination-roots/verify.py` (about 1 s) | `python3 -B domination-roots/verify.py --full NAUTY_DIR` (about 1 h; reruns the order ≤ 12 search) |
 | [Three-move subtraction games](subtraction-games/) | Manabe's Conjecture 52 for all b ≤ 2a, and for all b ≤ 250 with any c (computer-assisted) | [PDF](subtraction-games/paper.pdf) | `python3 -B subtraction-games/verify.py` (about 10 s; certificate for b ≤ 100) | `python3 -B subtraction-games/verify.py --full` (about 1 min; certificate for b ≤ 250) |
 
-## How these were produced
+## Acknowledgements
 
-AI systems (language models with computer search) were used to find the constructions and proofs, write the verification code and help draft the text. The author checked the results and is responsible for all content.
+AI systems were used to help find the constructions and proofs and to run the computations. The author verified all arguments and computations and takes full responsibility for all content.
 
 ## Checks
 
