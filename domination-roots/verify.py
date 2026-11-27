@@ -12,7 +12,8 @@ NAUTY_DIR is a built nauty 2.8.9 source tree:
 --full needs gcc. Each finished slice is kept in rerun/ with the sha256 of the
 binary that produced it and its arguments, so an interrupted run resumes where
 it stopped; a slice whose identity differs is recomputed, and every record,
-fresh or kept, passes the same validation.
+fresh or kept, passes the same validation. For an independent rerun, start
+with no rerun/ directory.
 
 Standard library only. Input: data/graphs.json (the graphs) and
 data/G10-edges.txt (the 373-vertex graph as a plain edge list). Nothing is read
@@ -103,11 +104,6 @@ def join_supports(parts):
         adj[a] |= 1 << b
         adj[b] |= 1 << a
     return adj
-
-
-def star(t):
-    """K_{1,t}, centre 0."""
-    return graph(t + 1, [(0, i) for i in range(1, t + 1)])
 
 
 # ------------------------------------------------------------ polynomials
@@ -254,9 +250,10 @@ def hub_formula(spec):
 
 
 def extension_values(adj, x):
-    """Lemma 3 at the point x for every T: the list whose entry T (T > 0) is
-    D(H + v_T, x) = D(H,x) - U_{H,T}(x) + x Q_{H,T}(x), where v_T is a new
-    vertex with neighbourhood T. Two subset-sum transforms, as in extproc.c."""
+    """The one-vertex formula of paper Section 5 at the point x for every T: the
+    list whose entry T (T > 0) is D(H + v_T, x) = D(H,x) - U_{H,T}(x) + x Q_{H,T}(x),
+    where v_T is a new vertex with neighbourhood T. Two subset-sum transforms, as
+    in extproc.c."""
     n = len(adj)
     full = (1 << n) - 1
     closed = [adj[v] | 1 << v for v in range(n)]
@@ -411,8 +408,8 @@ def corollary2(seeds):
           'D(G,1) odd for each, as Brouwer-Csorba-Schrijver predict')
 
 
-def theorem3_small():
-    """Orders <= 8 in pure Python (the paper's order-12 search, scaled down)."""
+def search_small():
+    """Orders <= 8 in pure Python (the search of Remark 2, scaled down)."""
     levels = connected_graphs(7)
     check([len(levels[n]) for n in range(1, 8)] == CONNECTED[1:8], 'graph counts differ from A001349')
     zeros_at_minus2, transform_zeros = [], 0
@@ -422,7 +419,7 @@ def theorem3_small():
             poly = brute_force(g)
             check(all(value(poly, r) != 0 for r in (-4, -6, -8, -10)), f'order {n} graph with a root')
             z += value(poly, -2) == 0
-            if n <= 5:                                   # Lemma 3 and its subset transform against brute force
+            if n <= 5:                                   # one-vertex formula and transform against brute force
                 full = (1 << n) - 1
                 fast = {x: extension_values(g, x) for x in (-2, -4)}
                 for t in range(1, 1 << n):
@@ -437,7 +434,7 @@ def theorem3_small():
                     formula = padd(padd(poly, [-c for c in avoiding]), [0] + brute_force(g, t))
                     h = [mask | (t >> i & 1) << n for i, mask in enumerate(g)] + [t]
                     direct = brute_force(h)
-                    check(formula == direct, 'Lemma 3 fails')
+                    check(formula == direct, 'one-vertex formula fails')
                     for x, values in fast.items():
                         check(values[t] == value(direct, x), 'subset transform disagrees with brute force')
                         transform_zeros += values[t] == 0
@@ -445,52 +442,14 @@ def theorem3_small():
     check(transform_zeros > 0, 'the subset transform found no zero')
     for g in levels[7]:
         check(all(v != 0 for v in extension_values(g, -4)[1:]), 'order-8 graph with root -4')
-    print('PASS Theorem 3 (scaled down): connected graphs of orders 1-7 = A001349; none has a root at '
-          '-4, -6, -8, -10; none of order 8 has root -4 (Lemma 3 by subset transform; Lemma 3 and the '
-          f'transform at -2 and -4 equal brute force on every extension of order <= 6, {transform_zeros} of '
-          'them zeros)')
+    print('PASS Remark 2 (scaled down): connected graphs of orders 1-7 = A001349; none has a root at '
+          '-4, -6, -8, -10; none of order 8 has root -4 (one-vertex formula by subset transform; formula and '
+          'transform at -2 and -4 equal brute force on every extension of a connected graph of order <= 5, '
+          f'{transform_zeros} of them zeros)')
     return zeros_at_minus2
 
 
-def theorem4(data, g4, tex):
-    spec = data['G16']
-    adj = hub_graph(spec)
-    poly = brute_force(adj)
-    check(len(adj) == 16 and len(edge_list(adj)) == 25 and connected(adj), 'G16 structure')
-    check(poly == hub_formula(spec), 'G16: Lemma 1')
-    check(value(poly, -4) == 0 and value(derivative(poly), -4) != 0, 'G16: root -4 not simple')
-    block = spec['blocks'][0]
-    f = graph(block['order'], block['edges'])
-    check(connected(f) and block['attach'], 'G16: block not connected or attachment set empty')
-    p = value(brute_force(f), -4)
-    q = value(brute_force(f, sum(1 << t for t in block['attach'])), -4)
-    check(4 ** (spec['leaves'] - 1) * p == 3 ** spec['leaves'] * q, 'G16: Lemma 1 condition')
-    tex['SixteenProd'] = 3 ** spec['leaves'] * q
-    g4poly = brute_force(g4)
-    check(is_support(g4, data['G4']['center']) and is_support(star(1), 0), 'supports')
-    check(len(g4) == 15 and connected(g4) and value(g4poly, -4) == 0
-          and value(derivative(g4poly), -4) != 0, 'G4')
-    for s in range(2, 6):                       # orders 17..20: G4 joined to a star on s vertices
-        joined = join_supports([(g4, data['G4']['center']), (star(s - 1), 0)])
-        jp, _ = frontier_dp(joined)
-        check(len(joined) == 15 + s and connected(joined), 'star join structure')
-        check(jp == pmul(g4poly, brute_force(star(s - 1))), 'Lemma 2 fails on a star join')
-        check(multiplicity(jp, -4) == 1, 'star join: root -4 not simple')
-    tex['SixteenP'], tex['SixteenQ'] = p, q
-    tex['SixteenEdges'] = r',\ '.join(f'{u}{v}' for u, v in block['edges'])
-    tex['SixteenT'] = r'\{' + ','.join(map(str, block['attach'])) + r'\}'
-    tex['FourEdges'] = ', '.join(f'$\\{{{u},{v}\\}}$' for u, v in edge_list(g4))
-    terms = [(f'{c}' if c != 1 else '') + (f'x^{{{i}}}' if i > 1 else 'x' if i == 1 else '')
-             for i, c in reversed(list(enumerate(poly))) if c]
-    tex['SixteenPoly'] = ' + '.join(terms[:7]) + r' \\ + ' + ' + '.join(terms[7:])
-    tex['SixteenDeriv'] = value(derivative(poly), -4)
-    tex['FourDeriv'] = value(derivative(g4poly), -4)
-    print("PASS Theorem 4: G16 connected, n=16, m=25, D(G16,-4)=0 with D'(G16,-4)="
-          f"{tex['SixteenDeriv']} (brute force over 2^16 sets, equals Lemma 1); G4 joined to stars "
-          'gives orders 17-20 with a simple root -4 and D multiplying (Lemma 2)')
-
-
-def theorem5(data, seeds, centres, tex):
+def theorem3(data, seeds, centres, tex):
     p = 1009
     rows = []
     leaves = {k: sum(adj[centres[k]] >> u & 1 and adj[u].bit_count() == 1 for u in range(len(adj)))
@@ -519,7 +478,7 @@ def theorem5(data, seeds, centres, tex):
         product = pmul(product, ppow(seeds[k][1], target[k]))
     check(connected(joined) and poly == product, 'Lemma 2 fails on the multiplicity instance')
     check({k: multiplicity(poly, -k) for k in seeds} == target, 'multiplicities')
-    print(f'PASS Theorem 5: G4, G6, G8, G10 have a support, a simple root at their own point and '
+    print(f'PASS Theorem 3: G4, G6, G8, G10 have a support, a simple root at their own point and '
           f'none at the other three (residues mod {p}); the {len(joined)}-vertex join for (2,1,1,1) '
           'has D = product and multiplicities exactly (2,1,1,1)')
 
@@ -571,7 +530,7 @@ def parse_result(lines, program, n, res, mod):
 
 def full(nauty, small_zeros, g4):
     """Rebuild domproc/extproc against nauty 2.8.9 and rerun the exhaustive
-    search: brute force for orders 1..11, Lemma 3 extensions for order 12.
+    search: brute force for orders 1..11, one-vertex extensions for order 12.
     Each slice's record is checkpointed in rerun/ under the sha256 of the
     binary and the slice arguments; rerun the command to resume. A checkpoint
     with another identity is regenerated; one with this identity whose record
@@ -580,7 +539,7 @@ def full(nauty, small_zeros, g4):
     os.makedirs(build, exist_ok=True)
     flags = ['gcc', '-O3', '-mpopcnt', '-march=native']
     # Positive control for the C extension check: G4 minus its leaf 14 gains a root -4 by
-    # restoring that leaf at the support 2, and every zero agrees with Lemma 3 in Python.
+    # restoring that leaf at the support 2, and every zero agrees with the formula in Python.
     subprocess.run(flags + ['-o', os.path.join(build, 'ext_standalone'), os.path.join(HERE, 'search', 'extproc.c')],
                    check=True)
     base = [mask & ~(1 << 14) for mask in g4[:14]]
@@ -592,9 +551,9 @@ def full(nauty, small_zeros, g4):
     python_zeros = {t for t, v in enumerate(extension_values(base, -4)) if v == 0}
     check(g4[14] == 1 << 2 and 1 << 2 in c_zeros and c_zeros == python_zeros
           and stdout.splitlines()[-1] == f'zeros={len(c_zeros)}',
-          'extproc.c misses the G4 extension or disagrees with Lemma 3')
+          'extproc.c misses the G4 extension or disagrees with the one-vertex formula')
     print(f'  extproc.c positive control: {len(c_zeros)} zero(s) on G4 minus a leaf, including G4 itself; '
-          'equal to Lemma 3 in Python', flush=True)
+          'equal to the one-vertex formula in Python', flush=True)
     objects = [os.path.join(nauty, o) for o in
                ('gtoolsW.o', 'nautyW1.o', 'nautilW1.o', 'naugraphW1.o', 'schreier.o', 'naurng.o')]
     fingerprint = {}
@@ -642,7 +601,7 @@ def full(nauty, small_zeros, g4):
     tot = totals('geng_ext4', 11, 512, 'order 12 (one-vertex extensions of order 11)')
     check(tot['bases'] == CONNECTED[11] and tot['tests'] == CONNECTED[11] * 2047, 'order 12 coverage')
     check(tot['zeros'] == 0, 'order 12: a graph with root -4')
-    print('PASS Theorem 3 (full): no connected graph of order <= 11 has a root at -4, -6, -8, -10; '
+    print('PASS Remark 2 (full): no connected graph of order <= 11 has a root at -4, -6, -8, -10; '
           'no connected graph of order 12 has root -4')
 
 
@@ -661,9 +620,8 @@ def main():
     seeds = {k: (adj, frontier_dp(adj)[0]) for k, adj in seeds.items()}
     seeds[10] = (graph(373, edges), g10)
     corollary2(seeds)
-    small_zeros = theorem3_small()
-    theorem4(data, graphs['G4'], tex)
-    theorem5(data, seeds, {4: centres['G4'], 6: centres['G6'], 8: centres['G8'], 10: 0}, tex)
+    small_zeros = search_small()
+    theorem3(data, seeds, {4: centres['G4'], 6: centres['G6'], 8: centres['G8'], 10: 0}, tex)
     generated = tables(tex)
     path = os.path.join(HERE, 'tables.tex')
     if sys.argv[1:] == ['--write-tables']:

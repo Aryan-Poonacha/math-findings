@@ -14,9 +14,7 @@
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}
 
-\newcommand{\nmin}{n_{\min}}
-
-\title[A domination root at $-10$]{A graph with domination root $-10$,\\ and small graphs with domination root $-4$}
+\title[A domination root at $-10$]{A graph with domination root $-10$}
 \author{Aryan Poonacha}
 \address{\url{https://github.com/Aryan-Poonacha/math-findings}}
 \date{27 November 2026}
@@ -29,14 +27,12 @@
 The domination polynomial of a graph $G$ is $D(G,x)=\sum_S x^{|S|}$, summed over
 the dominating sets $S$ of $G$. Alikhani and Griswold (2026) found a graph with
 $D(G,-4)=0$, refuting the conjecture that $0$ and $-2$ are the only integer
-domination roots, and asked about other roots and about the least order for
-$-4$. We give a connected graph on $373$ vertices with $D(G,-10)=0$; with known
-results, the integers in $[-11,-1]$ that are domination roots are exactly
-$-2,-4,-6,-8,-10$. An exhaustive computer search shows that no graph on at most
-$12$ vertices has domination root $-4$, so the least order is $13$, $14$ or
-$15$. We also give an explicit $16$-vertex certificate with a simple root $-4$,
-and extend the known joins so that $-4,-6,-8,-10$ occur together with any
-prescribed multiplicities.
+domination roots, and asked whether other negative integers occur. We give a
+connected graph on $373$ vertices with $-10$ as a simple domination root. With
+known results, the integers in $[-11,-1]$ that are domination roots are exactly
+$-2,-4,-6,-8,-10$. Joining graphs at supports then gives, for any prescribed
+multiplicities, a connected graph whose roots $-4,-6,-8,-10$ have exactly those
+multiplicities.
 \end{abstract}
 \maketitle
 
@@ -60,66 +56,45 @@ domination roots. Weisstein \cite{Wei} reports that no graph with at most $10$
 vertices has an integer domination root other than $0$ and $-2$.
 
 Alikhani and Griswold \cite{AG26} refuted the conjecture with a connected graph
-$G_{33}$ on $33$ vertices with $D(G_{33},-4)=0$, and asked
-\cite[Section~4]{AG26}:
+on $33$ vertices with $D(G,-4)=0$, and asked \cite[Section~4]{AG26}:
 \begin{quote}
 1. Are there other negative integer domination roots, such as $-6$ or $-8$,
-attainable via richer S-unit branch cancellations?\\
-2. Is $n = 33$ the minimal order of a graph admitting $-4$ as a domination root?\\
-3. Does there exist an infinite family of graphs $G$ satisfying $D(G,-4) = 0$?
+attainable via richer S-unit branch cancellations?
 \end{quote}
-Several answers have appeared since, all as preprints, blog posts or
-repositories:
-\begin{itemize}
-\item 18 September 2026: a connected planar graph with $30$ vertices and simple
-  root $-4$ (Reshetnikov's repository \cite{Res26}), answering question~2
-  negatively.
-\item By 10 October 2026 (the date of the archived copy cited): the MathArena post
-  \cite{MA26} gives a connected graph with $15$ vertices and $19$ edges with
-  root $-4$ (found in a run of the GPT-6.1 Sol model) and connected graphs
-  with roots $-6$ ($31$ vertices) and $-8$ ($83$ vertices). It reports an
-  exhaustive search showing that no connected graph with at most $11$ vertices
-  has root $-4$, so that $12\le \nmin(-4)\le 15$, and remarks that joining the
-  centres of such graphs multiplies their domination polynomials, which gives
-  each root at arbitrarily large orders and one graph with all three roots.
-  MathArena also reports an accepted $16$-vertex witness from its first
-  constructive run. Its published witness data specify the $15$-vertex graph.
-  Below we give an explicit $16$-vertex certificate and verify that its root is
-  simple.
-\item 1 November 2026: the Omega Institute published a Lean-checked
-  $21$-vertex witness for $-4$ \cite{Om26} and separately formalized a
-  connected family of orders $33r+2$, with $r\ge1$ \cite{Om26b}.
-\item 3 November 2026: Ma and Zhang \cite{MZ26} subsequently gave a written
-  support-join proof of exact multiplicity $r$ and connected examples of every
-  order $n\ge 35$, with maximum degree seven and cycle rank four.
-\end{itemize}
-The joining step rests on the irrelevant-edge theorem of Kotek, Preen, Simon,
-Tittmann and Trinks \cite[Theorems~3.10 and~3.11]{KPSTT12} (Lemma~\ref{lem:join}
-below). Here $\nmin(r)$ denotes the least order of a graph with domination
-root~$r$; since $D$ is multiplicative over components, it is also the least
-order of a connected one.
+They also asked for the least order of a graph with root $-4$ and for an
+infinite family. Answers have since appeared as preprints, blog posts and
+repositories. The MathArena post \cite{MA26} (archived 10 October 2026) gives
+connected graphs with roots $-6$ ($31$ vertices) and $-8$ ($83$ vertices) and a
+connected $15$-vertex graph with root $-4$, and remarks that joining the
+centres of such graphs multiplies their domination polynomials. Reshetnikov's
+report \cite{Res26} gives a connected $30$-vertex graph with root $-4$ (Part~I,
+18 September 2026). Its Part~II (30 September 2026) shows that if $-k$ is a root
+of multiplicity $r$, then $(k-1)^r$ divides $D(G,-1)$ and is at most
+$3^{\beta(G)}$, where $\beta(G)$ is the cycle rank; so no graph with
+$\beta(G)\le2$ has root $-6$, and it asks whether $-8$ or $-10$ is a root of a
+graph with $\beta(G)=2$. The Omega Institute gave a Lean-checked $21$-vertex
+graph with root $-4$ \cite{Om26} and a connected family of orders $33r+2$
+\cite{Om26b}. Ma and Zhang \cite{MZ26} proved that joining $r$ copies of the
+$33$-vertex graph at supports gives the root $-4$ with multiplicity exactly $r$,
+and gave connected examples of every order $n\ge35$. Finally, lucasxx16 \cite{Luc26} (21 November 2026;
+computer-assisted, not peer reviewed) proved that no graph with at most $14$
+vertices has root $-4$, so with \cite{MA26} the least order is $15$.
 
-The main contributions are the $-10$ witness (Theorem~\ref{thm:ten}), which
-with the results above determines the integer domination roots in $[-11,-1]$
-(Corollary~\ref{cor:interval}), and the exclusion of $-4$ at order $12$, which
-gives $13\le\nmin(-4)\le15$ (Theorem~\ref{thm:search}, computer-assisted). The
-order-$16$ certificate gives a simple-root example at the remaining order, $16$,
-which joins of the $15$-vertex graph with stars do not reach
-(Theorem~\ref{thm:orders}). The joining construction incorporates $-10$ into
-the prescribed-multiplicity statement (Theorem~\ref{thm:mult}). The edge lists,
-verification code and search logs are available at \cite{Art}.
+The main result is a connected graph $G_{10}$ with the simple root $-10$
+(Theorem~\ref{thm:ten}). With the results above it determines the integer
+domination roots in $[-11,-1]$ (Corollary~\ref{cor:interval}). The joining
+construction then adds $-10$ to the prescribed-multiplicity statement
+(Theorem~\ref{thm:mult}). The edge lists, verification code and search logs are
+available at \cite{Art}.
 
-\section{Three lemmas}\label{sec:lemmas}
+\section{Two lemmas}\label{sec:lemmas}
 
 For a vertex set $S$ write $N[S]$ for the set of vertices in $S$ or adjacent to
 a vertex of $S$. For a graph $F$ and $T\subseteq V(F)$ let
 \[
   Q_{F,T}(x)=\sum_{\substack{S\subseteq V(F)\\ V(F)\setminus T\subseteq N[S]}} x^{|S|},
-  \qquad
-  U_{F,T}(x)=\sum_{\substack{S\subseteq V(F)\setminus T\\ S \text{ dominates } F}} x^{|S|}.
 \]
-Thus $Q_{F,T}$ counts sets that dominate every vertex outside $T$, and
-$U_{F,T}$ counts dominating sets disjoint from $T$; $Q_{F,\emptyset}=D(F,x)$.
+which counts the sets that dominate every vertex outside $T$; $Q_{F,\emptyset}=D(F,x)$.
 A \emph{leaf} is a vertex of degree one and a \emph{support} is a vertex
 adjacent to a leaf. On vertex sets $\{0,\dots,b-1\}$ with $b\le 10$ we write the
 edge $\{u,v\}$ as the two-digit word $uv$.
@@ -173,31 +148,6 @@ and $S$ contains $p_i$ or $s_i$; either way $s_i\in N[S_i]$. Every other vertex
 of $G_i$ has the same closed neighbourhood in $G$ as in $G_i$. Hence $S_i$
 dominates $G_i$. The dominating sets of $G$ are therefore exactly the unions of
 dominating sets of the $G_i$, and $x^{|S|}=\prod_i x^{|S_i|}$.
-\end{proof}
-
-A support is domination-covered because its leaf has closed neighbourhood
-contained in that of the support. By Kotek et al.\ \cite[Theorem~3.11]{KPSTT12},
-an edge $uv$ is irrelevant in $G$ if its endpoints are domination-covered in
-$G-uv$. In particular, an edge can be added between nonadjacent supports without
-changing the polynomial. The same lemma is used in \cite{MA26} and \cite{MZ26}.
-
-The next lemma writes the vertex-inclusion and exclusion split of Kotek et
-al.\ \cite[Theorem~2.1]{KPSTT12} in the form used by the exhaustive search of
-Section~\ref{sec:four}.
-
-\begin{lemma}[one more vertex]\label{lem:ext}
-Let $H$ be a graph, $\emptyset\ne T\subseteq V(H)$, and let $H+v_T$ be $H$
-together with a new vertex $v$ adjacent exactly to $T$. Then
-\[
-  D(H+v_T,x)=D(H,x)-U_{H,T}(x)+x\,Q_{H,T}(x).
-\]
-\end{lemma}
-
-\begin{proof}
-A set $S\subseteq V(H)$ dominates $H+v_T$ exactly when it dominates $H$ and
-meets $T$; these sets contribute $D(H,x)-U_{H,T}(x)$. A set $S\cup\{v\}$ with
-$S\subseteq V(H)$ dominates $H+v_T$ exactly when $S$ dominates every vertex of
-$H$ outside $T$; these contribute $x\,Q_{H,T}(x)$.
 \end{proof}
 
 \section{A domination root at \texorpdfstring{$-10$}{-10}}\label{sec:ten}
@@ -255,14 +205,8 @@ $D'(G_{10},-10)\equiv 912\pmod{1009}$, so the root is simple.
 The full polynomial $D(G_{10},x)$, computed in two independent ways
 (Section~\ref{sec:certificates}), is
 $x^{\TenGamma}(x+2)^{16}(x+10)R(x)$ with $R(r)\ne 0$ for every integer
-$r\in[-11,-1]$. The search at $-10$ uses the block-ratio catalog and
-prime-valuation approach that MathArena used at $-6$ and $-8$ \cite{MA26}. Its
-catalog had the ratios $D(F,-10)/Q_{F,T}(-10)$ for every connected graph $F$
-with at most $8$ vertices and for random connected graphs of larger order,
-with every attachment set $T$. It retained nonzero ratios whose reductions use
-only primes at most $97$, then an integer program balanced their valuations,
-keeping the order small, and the signs in \eqref{eq:ten} were checked. No
-minimality is claimed.
+$r\in[-11,-1]$. $G_{10}$ was found by the block-ratio search that MathArena used
+at $-6$ and $-8$ \cite{MA26}; no minimality is claimed.
 \end{remark}
 
 \begin{corollary}\label{cor:interval}
@@ -277,95 +221,11 @@ Connected examples for the even values are $K_2$ for $-2$, the graph of
 graphs of \cite{MA26} for $-6$ and $-8$, and $G_{10}$ for $-10$.
 \end{proof}
 
-\section{Small graphs with domination root \texorpdfstring{$-4$}{-4}}\label{sec:four}
-
-\begin{theorem}\label{thm:search}
-No graph with at most $12$ vertices has domination root $-4$. Hence
-$13\le \nmin(-4)\le 15$.
-\end{theorem}
-
-\begin{proof}[Proof (computer-assisted)]
-Because $D$ is multiplicative over components it suffices to consider connected
-graphs. The upper bound is the $15$-vertex graph of \cite{MA26}.
-
-\emph{Orders $1$ to $11$.} The program \texttt{geng} of nauty~2.8.9
-\cite{MP14} lists one graph from each isomorphism class of connected graphs of
-a given order. For every listed graph the program \texttt{search/domproc.c}
-counts the dominating sets of each size by running through all $2^n$ vertex
-subsets, and evaluates $D(G,r)$ for $r=-2,\dots,-10$ in exact $128$-bit integer
-arithmetic. The numbers of graphs listed for $n=1,\dots,11$ are $1$, $1$, $2$,
-$6$, $21$, $112$, $853$, $11117$, $261080$, $11716571$, $1006700565$, in
-agreement with OEIS A001349 \cite{OEIS}; no value $D(G,-4)$ is zero.
-
-\emph{Order $12$.} Every connected graph $G$ on $12$ vertices has a vertex $v$
-with $G-v$ connected (a leaf of a spanning tree), so $G\cong H+v_T$ for a
-connected graph $H$ on $11$ vertices and some nonempty $T\subseteq V(H)$, in the
-notation of Lemma~\ref{lem:ext}; relabelling, we may take $H$ to be the
-representative of its isomorphism class listed by \texttt{geng}. For every one of the $1006700565$ graphs $H$
-listed by \texttt{geng}, the program \texttt{search/extproc.c} computes
-$D(H,-4)$, $U_{H,T}(-4)$ and $Q_{H,T}(-4)$ for all $2^{11}$ sets $T$ at once.
-It adds the weight $(-4)^{|S|}$ of every $S\subseteq V(H)$ to entry
-$V(H)\setminus N[S]$ of a first array and, when $S$ dominates $H$, to entry $S$
-of a second array. After a subset-sum transform of both arrays (each entry
-replaced by the sum of the entries indexed by its subsets; MathArena uses a
-subset transform for its attachment counts \cite{MA26}), entry $T$ of the
-first array is $Q_{H,T}(-4)$ and entry $V(H)\setminus T$ of the second is
-$U_{H,T}(-4)$. Every array entry has absolute value at most
-$\sum_S 4^{|S|}=5^{11}$ and every value of Lemma~\ref{lem:ext} at most
-$6\cdot 5^{11}<2^{63}$, so $64$-bit arithmetic is exact. All
-$2047\cdot 1006700565=2060716056555$ values of $D(H+v_T,-4)$ given by
-Lemma~\ref{lem:ext} are nonzero.
-\end{proof}
-
-\begin{remark}\label{rem:others}
-The same computation shows that no graph with at most $11$ vertices has a
-domination root at $-6$, $-8$ or $-10$, so $12\le\nmin(-6)\le 31$,
-$12\le\nmin(-8)\le 83$ (upper bounds from \cite{MA26}) and
-$12\le\nmin(-10)\le 373$.
-\end{remark}
-
-MathArena reports witnesses of orders $15$ and $16$ \cite{MA26}; with its join
-remark and stars these already give connected graphs with root $-4$ of every
-order $n\ge15$. The next theorem writes this out, with published data at order
-$16$ and a simple root at every order. Let $F_{16}$ be the connected graph on
-$\{0,\dots,9\}$ with the $16$ edges
-\[
-  \SixteenEdges,
-\]
-and let $G_{16}$ be the graph of Lemma~\ref{lem:hub} with this single block, the
-nonempty attachment set $T=\SixteenT$ and $\ell=5$ leaves. By
-Lemma~\ref{lem:hub} it is connected; it has $16$ vertices and $16+4+5=25$ edges.
-
-\begin{theorem}[cf.~\cite{MA26}]\label{thm:orders}
-$D(G_{16},-4)=0$, and the root $-4$ is simple. For every $n\ge 15$ there is a
-connected graph of order $n$ in which $-4$ is a simple domination root.
-\end{theorem}
-
-\begin{proof}
-Listing the $2^{10}$ subsets of $V(F_{16})$ gives $D(F_{16},-4)=\SixteenP$ and
-$Q_{F_{16},T}(-4)=\SixteenQ$. Since
-$4^4\cdot\SixteenP=3^5\cdot\SixteenQ=\SixteenProd$, \eqref{eq:hub} with $k=4$ and
-$\ell=5$ gives $D(G_{16},-4)=0$. Direct enumeration of the $2^{16}$ subsets
-gives $D(G_{16},-4)=0$ and $D'(G_{16},-4)=\SixteenDeriv$, so the root is
-simple.
-
-For $n=15$ take the graph $G_4$ of \cite{MA26}: on $\{0,\dots,14\}$ with edges
-\FourEdges; it has
-$D(G_4,-4)=0$ and $D'(G_4,-4)=\FourDeriv$. For $n=16$ take $G_{16}$. For
-$n\ge17$ let $t=n-16\ge1$ and join the support $2$ of $G_4$ (adjacent to the
-leaves $10,\dots,14$) by one edge to the centre of the star $K_{1,t}$, which is
-a support. The result is connected of order $n$, and by
-Lemma~\ref{lem:join} its domination polynomial is $D(G_4,x)D(K_{1,t},x)$, where
-$D(K_{1,t},x)=x(1+x)^t+x^t$. Now
-$D(K_{1,t},-4)=(-1)^t\,4\,(4^{t-1}-3^t)\ne0$, because $4^{t-1}-3^t$ is $-2$
-for $t=1$ and odd for $t\ge2$. So $-4$ is a simple root of the product.
-\end{proof}
-
-\begin{remark}
-$G_{16}$ was found by a computer search among one-vertex extensions of
-$15$-vertex graphs with root $-4$ that have the shape of Lemma~\ref{lem:hub}
-with a single block. $G_4$ itself has that shape: the hub $2$, five leaves, and a $9$-vertex
-block attached at $\{3,5\}$.
+\begin{remark}\label{rem:small}
+A separate exhaustive search (Section~\ref{sec:certificates}) shows that no
+graph with at most $12$ vertices has domination root $-4$, and none with at most
+$11$ vertices has a root at $-6$, $-8$ or $-10$. For $-4$ this is an independent
+computation that agrees with \cite{Luc26} through order $12$.
 \end{remark}
 
 \section{Prescribed multiplicities}\label{sec:mult}
@@ -405,105 +265,87 @@ $-k$ is a simple root of $D(G_k,x)$ and is not a root of $D(G_j,x)$ for
 $j\ne k$; so its multiplicity in the product is $m_k$.
 \end{proof}
 
-MathArena's join and the off-diagonal checks in Table~\ref{tab:residues} give
-prescribed multiplicities for its three roots \cite{MA26}. Ma and Zhang give
-exact multiplicities for $-4$ alone \cite{MZ26}. The $-10$ witness extends the
-construction to four roots.
+For $-4$, $-6$ and $-8$ alone this follows from MathArena's join \cite{MA26} and
+the off-diagonal entries of Table~\ref{tab:residues}; Ma and Zhang \cite{MZ26}
+proved it for $-4$. The new ingredient is $G_{10}$.
 
-\section{Computational certificates}\label{sec:certificates}
+\section{Computations}\label{sec:certificates}
+
+The computer-assisted parts are the entries of Tables~\ref{tab:blocks}
+and~\ref{tab:residues}, the factorisation of $D(G_{10},x)$, and
+Remark~\ref{rem:small}. Lemmas~\ref{lem:hub} and~\ref{lem:join},
+Corollary~\ref{cor:interval} and the deductions in Theorems~\ref{thm:ten}
+and~\ref{thm:mult} are proved by hand above.
 
 The program \texttt{verify.py} uses only the Python standard library. It reads
 the graphs from \texttt{data/graphs.json} and \texttt{data/G10-edges.txt},
 recomputes everything from the definitions, regenerates the numbers in
-Tables~\ref{tab:blocks}, \ref{tab:residues}, \ref{tab:edges} and in
-Theorem~\ref{thm:orders} and checks them against the file included by this
-paper, and stops at the first discrepancy. Its default mode runs in about one
-second and checks:
+Tables~\ref{tab:blocks}--\ref{tab:edges} and checks them against the file
+included by this paper, and stops at the first discrepancy. Its default mode,
+\texttt{python3 -B verify.py}, runs in about one second and checks:
 \begin{itemize}
 \item Theorem~\ref{thm:ten}: the edge list is the graph described by the block
   data; $G_{10}$ is simple and connected with $\TenOrder$ vertices and
   $\TenEdges$ edges; $D(G_{10},x)$ is computed from the edge list alone by a
-  dynamic program over a vertex order (each processed vertex that still has an
-  unprocessed neighbour carries one of three states: in $S$, dominated, not yet
-  dominated), and again from Lemma~\ref{lem:hub} with each block counted by
-  subset enumeration; the two polynomials are equal; the multiplicities of its
-  integer roots in $[-11,-1]$; and identity \eqref{eq:ten}. The dynamic program
-  is first checked against subset enumeration on $300$ random graphs.
-\item Theorem~\ref{thm:search} at small scale: a separate Python enumeration of
-  connected graphs up to isomorphism through order $7$ (counts as in
-  A001349), no root at $-4,-6,-8,-10$ there, and no root $-4$ at order $8$ via
-  Lemma~\ref{lem:ext} and the subset transform. For all extensions of graphs
-  of order at most $5$, Lemma~\ref{lem:ext} is compared with subset
-  enumeration, and every value of the subset transform at $x=-2$ and $x=-4$ with
-  the directly computed polynomial; this includes extensions with a root at
-  $-2$, so the transform is tested on hits as well as on nonzero values.
-\item Theorem~\ref{thm:orders}: $G_{16}$ and $G_4$ by enumerating all subsets;
-  the joins with $K_{1,t}$ for $t=1,\dots,4$ (orders $17$ to $20$). The full
-  polynomial $D(G_{16},x)$ is the macro \texttt{\textbackslash SixteenPoly} of
-  the generated file \texttt{tables.tex}.
+  dynamic program over a vertex order, and again from Lemma~\ref{lem:hub} with
+  each block counted by subset enumeration; the two polynomials are equal; the
+  multiplicities of its integer roots in $[-11,-1]$; and identity
+  \eqref{eq:ten}. The dynamic program is first checked against subset
+  enumeration on $300$ random graphs.
 \item Theorem~\ref{thm:mult}: Table~\ref{tab:residues} from the exact
-  polynomials, and, for the multiplicities $m_4=2$ and $m_6=m_8=m_{10}=1$, the
-  joined graph on $517$ vertices: its polynomial, computed by the dynamic
-  program, equals the product and has the stated multiplicities.
+  polynomials, and, for $m_4=2$ and $m_6=m_8=m_{10}=1$, the joined graph on
+  $517$ vertices: its polynomial equals the product and has the stated
+  multiplicities.
+\item Remark~\ref{rem:small} at small scale: a separate Python enumeration of
+  the connected graphs up to isomorphism through order $7$, with the counts of
+  A001349 \cite{OEIS} and no root at $-4$, $-6$, $-8$ or $-10$; and no root $-4$
+  at order $8$, by the method below. On all extensions of connected graphs of
+  order at most $5$ the method is compared with subset enumeration at $x=-2$
+  and $x=-4$, including extensions with a root at $-2$.
 \end{itemize}
-The command
-\begin{center}
-\texttt{python3 -B verify.py --full NAUTY\_DIR}
-\end{center}
-also recompiles \texttt{search/domproc.c} and \texttt{search/extproc.c} against
-a built copy of nauty~2.8.9 and reruns the search of Theorem~\ref{thm:search},
-comparing graph counts with A001349 and, for orders up to $7$, the number of
-graphs with root $-2$ with the Python enumeration. A fresh run compiles both
-processors and executes every partition. A resumed run reuses a partition only
-when its program fingerprint, arguments and complete result record match.
-Every record, fresh or reused, must consist of one result line with the
-expected fields, order and root and nonnegative counts, and for order $12$ the
-number of tests in each partition must be $2047$ times its number of base
-graphs. Before the search, \texttt{search/extproc.c} compiled on its own must
-report the root $-4$ of $G_4$ from $G_4$ minus a leaf, and agree with
-Lemma~\ref{lem:ext} on that graph. On an AMD Ryzen~9 4900H (8 cores, 16
-threads) with $15$ parallel jobs, order $11$ took $6$ to $9$ minutes and order
-$12$ about an hour ($3518$ seconds in the first run). The direct search at order
-$10$ took about $18$ seconds in the first run. The search was run twice, with
-identical results; the logs, the build commands and the SHA-256 hashes of the
-sources and binaries are in \texttt{logs/}.
+
+\emph{The search of Remark~\ref{rem:small}.} Since $D$ is multiplicative over
+components, it suffices to consider connected graphs. For orders $1$ to $11$,
+the program \texttt{geng} of nauty~2.8.9 \cite{MP14} lists one graph from each
+isomorphism class of connected graphs (the counts agree with A001349), and
+\texttt{search/domproc.c} counts the dominating sets of each size over all
+$2^n$ vertex subsets and evaluates $D(G,r)$, $r=-2,\dots,-10$, in exact $128$-bit
+arithmetic. At order $12$, every connected graph is $H+v_T$: a connected graph
+$H$ on $11$ vertices (delete a leaf of a spanning tree) and a new vertex $v$
+adjacent exactly to a nonempty $T\subseteq V(H)$. A set $S\subseteq V(H)$
+dominates $H+v_T$ exactly when it dominates $H$ and meets $T$, and
+$S\cup\{v\}$ does exactly when $S$ dominates every vertex outside $T$; so
+\[
+  D(H+v_T,x)=D(H,x)-U_{H,T}(x)+x\,Q_{H,T}(x),
+\]
+where $U_{H,T}$ sums $x^{|S|}$ over the dominating sets $S$ of $H$ disjoint from
+$T$. For each of the $1006700565$ graphs $H$ listed by \texttt{geng},
+\texttt{search/extproc.c} computes these values at $x=-4$ for all $2047$ sets
+$T$ by two subset-sum transforms. Every array entry and every value of the
+formula is at most $6\cdot5^{11}<2^{63}$ in absolute value, so $64$-bit
+arithmetic is exact. No value is zero. This is one C implementation, run twice
+with identical totals; the order-$12$ step takes about an hour on $15$
+threads. The command
+\texttt{python3 -B verify.py --full NAUTY\_DIR} rebuilds it against nauty and
+reruns it. The logs, build commands and SHA-256 hashes are in \texttt{logs/};
+the logged second run was made by an earlier revision of \texttt{verify.py}
+with the same C code.
 
 \section{Open questions}
 
 \begin{enumerate}
 \item Is every negative even integer a domination root of some graph? The
   first case not settled here is $-12$.
-\item Is $\nmin(-4)$ equal to $13$, $14$ or $15$? Extending the search of
-  Theorem~\ref{thm:search} to order $13$ means testing all nonempty
-  neighbourhoods of a new vertex for each of the $164059830476$ connected
-  graphs on $12$ vertices \cite{OEIS}: about $160$ times as many base graphs
-  as the order-$12$ run, each with twice as many sets $T$.
-\item What are $\nmin(-6)$, $\nmin(-8)$ and $\nmin(-10)$? By
-  Remark~\ref{rem:others} they lie in $[12,31]$, $[12,83]$ and $[12,373]$.
+\item What are the least orders of graphs with domination roots $-6$, $-8$ and
+  $-10$? By Remark~\ref{rem:small} and \cite{MA26} they lie in $[12,31]$,
+  $[12,83]$ and $[12,373]$.
 \end{enumerate}
 
-\section*{Use of AI and verification}
+\section*{Acknowledgements}
 
-The results were found with AI systems directed by the author. The language
-model GPT-6.2 Astra, working with computer search, found $G_{10}$ and wrote the
-search that produced it. Anthropic's Claude Opus~5.5 rechecked the claims with
-new code, searched the literature, wrote \texttt{search/} and
-\texttt{verify.py}, ran the searches of Theorem~\ref{thm:search}, found
-$G_{16}$ and drafted this text. The checks are those of
-Section~\ref{sec:certificates}: two independent computations of
-$D(G_{10},x)$, subset enumeration of every block and of $G_{16}$ and $G_4$, a
-separate Python enumeration of small graphs, and two runs of the exhaustive
-search with identical results. No AI system is an author; the author is
-responsible for the content.
-
-The computer-assisted parts are: the entries of Tables~\ref{tab:blocks} and
-\ref{tab:residues}, the values $D(F_{16},-4)$, $Q_{F_{16},T}(-4)$,
-$D'(G_{16},-4)$ and $D'(G_4,-4)$, the remark on the factorisation of
-$D(G_{10},x)$ (all reproduced by \texttt{python3 -B verify.py}), and the whole
-of Theorem~\ref{thm:search} and Remark~\ref{rem:others} (reproduced by
-\texttt{python3 -B verify.py --full NAUTY\_DIR}). Lemmas~\ref{lem:hub}--\ref{lem:ext},
-Corollary~\ref{cor:interval} and the deductions in Theorems~\ref{thm:ten},
-\ref{thm:orders} and~\ref{thm:mult} are proved by hand above.
+AI systems (language models with computer search) were used to find the
+constructions and proofs, write the verification code and help draft the text.
+The author checked the results and is responsible for all content.
 
 \begin{thebibliography}{99}
 
@@ -521,7 +363,7 @@ arXiv:2608.00109v1 [math.CO], 31 July 2026.
 
 \bibitem{Art}
 A.~Poonacha, \emph{Data, code and search logs for ``A graph with domination
-root $-10$, and small graphs with domination root $-4$''}, release
+root $-10$''}, release
 \texttt{domination-roots-v1} of the repository \texttt{math-findings}.
 \url{https://github.com/Aryan-Poonacha/math-findings/tree/domination-roots-v1/domination-roots}
 
@@ -536,6 +378,12 @@ T.~Kotek, J.~Preen, F.~Simon, P.~Tittmann and M.~Trinks,
 \emph{Recurrence relations and splitting formulas for the domination polynomial},
 Electron. J. Combin. \textbf{19}(3) (2012), \#P47.
 \url{https://doi.org/10.37236/2475}
+
+\bibitem{Luc26}
+lucasxx16 (GitHub user),
+\emph{Minimum order for the domination root $-4$}, repository
+\texttt{domination-minus4}, 21 November 2026.
+\url{https://github.com/lucasxx16/domination-minus4} (accessed 27 November 2026)
 
 \bibitem{MZ26}
 H.~Ma and W.~Zhang,
@@ -580,8 +428,8 @@ infinite family}, pull request \#25225 of \emph{trureturing}, merged 1 November
 \bibitem{Res26}
 V.~Reshetnikov (ed.),
 \emph{A bicyclic 30-vertex graph with domination root $-4$}, Part~I
-(18 September 2026) and Part~II (30 September 2026), report in the ProveIt
-repository.
+(18 September 2026), and Part~II, \emph{Cycle budgets for integer domination
+roots} (30 September 2026), report in the ProveIt repository.
 \url{https://github.com/VladimirReshetnikov/ProveIt/tree/main/SetTheory/Cardinals/docs/reports/graph-theory/domination-root-minus-four-order-30}
 (accessed 27 November 2026)
 

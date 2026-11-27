@@ -4,7 +4,7 @@
    D(H+v, x) = D(H,x) - U_H(V\T) + x * Q_{H,T}(x), where
      U_H(B)   = sum over dominating sets S of H with S subset of B of x^|S|,
      Q_{H,T}  = sum over S dominating V(H)\T of x^|S|.
-   (Formula checked against brute force in checks.py, test 5c.)
+   (Formula checked against brute force by verify.py, function search_small.)
    Used as a geng OUTPROC (-DOUTPROC=extproc) or via the standalone driver. */
 #include <stdint.h>
 #include <stdio.h>
