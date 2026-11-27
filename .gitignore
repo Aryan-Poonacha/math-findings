@@ -1,6 +1,6 @@
 __pycache__/
 *.aux
 *.log
-!logs/*.log
+!**/logs/*.log
 *.out
 build/

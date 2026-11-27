@@ -1,0 +1,11 @@
+RESULT n=1 graphs=1 z2=0 z3=0 z4=0 z5=0 z6=0 z7=0 z8=0 z9=0 z10=0
+RESULT n=2 graphs=1 z2=1 z3=0 z4=0 z5=0 z6=0 z7=0 z8=0 z9=0 z10=0
+RESULT n=3 graphs=2 z2=0 z3=0 z4=0 z5=0 z6=0 z7=0 z8=0 z9=0 z10=0
+RESULT n=4 graphs=6 z2=2 z3=0 z4=0 z5=0 z6=0 z7=0 z8=0 z9=0 z10=0
+RESULT n=5 graphs=21 z2=4 z3=0 z4=0 z5=0 z6=0 z7=0 z8=0 z9=0 z10=0
+RESULT n=6 graphs=112 z2=27 z3=0 z4=0 z5=0 z6=0 z7=0 z8=0 z9=0 z10=0
+RESULT n=7 graphs=853 z2=199 z3=0 z4=0 z5=0 z6=0 z7=0 z8=0 z9=0 z10=0
+RESULT n=8 graphs=11117 z2=2405 z3=0 z4=0 z5=0 z6=0 z7=0 z8=0 z9=0 z10=0
+RESULT n=9 graphs=261080 z2=50996 z3=0 z4=0 z5=0 z6=0 z7=0 z8=0 z9=0 z10=0
+RESULT n=10 graphs=11716571 z2=1828585 z3=0 z4=0 z5=0 z6=0 z7=0 z8=0 z9=0 z10=0
+n=10 wall 17.85 s

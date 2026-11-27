@@ -1,0 +1,3 @@
+slices 512 of 512 {'bases': 1006700565, 'tests': 2060716056555, 'zeros': 0, 'tpl': 0} zero_lines 0
+expected bases (connected graphs on 11 vertices): 1006700565 (OEIS A001349)
+total wall 3517.92 s

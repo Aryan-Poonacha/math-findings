@@ -1,0 +1,28 @@
+# Output of: python3 -B verify.py --full <nauty2_8_9 build>  (AMD Ryzen 9 4900H, 15 parallel jobs)
+# The run was stopped once (a log-directory bug in verify.py, since fixed) and resumed;
+# 24 of the 512 order-12 slices had finished before the restart, so the 3180 s shown
+# covers the other 488. Slices of orders 10 and 11 were reused from the earlier attempt
+# (order 11 took 354 s there). "order 11" on the bases/tests line is the order-12 check
+# (one-vertex extensions of the order-11 graphs); verify.py now labels it so.
+PASS self-test: frontier DP equals brute force on 300 random graphs of order <= 11
+PASS Theorem 1: G10 connected, n=373, m=673; D(G10,x) by frontier DP (max 55 states) equals Lemma 1; -10 simple, -2 of multiplicity 16, no other root in [-11,-1]; Table 1 identity holds
+PASS Corollary 2: connected witnesses for -2 (K2), -4, -6, -8 (MathArena), -10 (G10); D(G,1) odd for each, as Brouwer-Csorba-Schrijver predict
+PASS Theorem 3 (scaled down): connected graphs of orders 1-7 = A001349; none has a root at -4, -6, -8, -10; none of order 8 has root -4 (Lemma 3, checked against brute force through order 6)
+PASS Theorem 4: G16 connected, n=16, m=25, D(G16,-4)=0 with D'(G16,-4)=-35032640 (brute force over 2^16 sets, equals Lemma 1); G4 joined to stars gives orders 17-20 with a simple root -4 and D multiplying (Lemma 2)
+PASS Theorem 5: G4, G6, G8, G10 have a support, a simple root at their own point and none at the other three (residues mod 1009); the 517-vertex join for (2,1,1,1) has D = product and multiplicities exactly (2,1,1,1)
+PASS tables.tex equals the values recomputed here
+default mode done in 1.0 s
+  order 1: {'graphs': 1, 'z2': 0, 'z3': 0, 'z4': 0, 'z5': 0, 'z6': 0, 'z7': 0, 'z8': 0, 'z9': 0, 'z10': 0}  (0 s)
+  order 2: {'graphs': 1, 'z2': 1, 'z3': 0, 'z4': 0, 'z5': 0, 'z6': 0, 'z7': 0, 'z8': 0, 'z9': 0, 'z10': 0}  (0 s)
+  order 3: {'graphs': 2, 'z2': 0, 'z3': 0, 'z4': 0, 'z5': 0, 'z6': 0, 'z7': 0, 'z8': 0, 'z9': 0, 'z10': 0}  (0 s)
+  order 4: {'graphs': 6, 'z2': 2, 'z3': 0, 'z4': 0, 'z5': 0, 'z6': 0, 'z7': 0, 'z8': 0, 'z9': 0, 'z10': 0}  (0 s)
+  order 5: {'graphs': 21, 'z2': 4, 'z3': 0, 'z4': 0, 'z5': 0, 'z6': 0, 'z7': 0, 'z8': 0, 'z9': 0, 'z10': 0}  (0 s)
+  order 6: {'graphs': 112, 'z2': 27, 'z3': 0, 'z4': 0, 'z5': 0, 'z6': 0, 'z7': 0, 'z8': 0, 'z9': 0, 'z10': 0}  (0 s)
+  order 7: {'graphs': 853, 'z2': 199, 'z3': 0, 'z4': 0, 'z5': 0, 'z6': 0, 'z7': 0, 'z8': 0, 'z9': 0, 'z10': 0}  (0 s)
+  order 8: {'graphs': 11117, 'z2': 2405, 'z3': 0, 'z4': 0, 'z5': 0, 'z6': 0, 'z7': 0, 'z8': 0, 'z9': 0, 'z10': 0}  (0 s)
+  order 9: {'graphs': 261080, 'z2': 50996, 'z3': 0, 'z4': 0, 'z5': 0, 'z6': 0, 'z7': 0, 'z8': 0, 'z9': 0, 'z10': 0}  (0 s)
+  order 10: {'graphs': 11716571, 'z2': 1828585, 'z3': 0, 'z4': 0, 'z5': 0, 'z6': 0, 'z7': 0, 'z8': 0, 'z9': 0, 'z10': 0}  (0 s)
+  order 11: {'graphs': 1006700565, 'z2': 134998287, 'z3': 0, 'z4': 0, 'z5': 0, 'z6': 0, 'z7': 0, 'z8': 0, 'z9': 0, 'z10': 0}  (0 s)
+  order 11: {'bases': 1006700565, 'tests': 2060716056555, 'zeros': 0, 'tpl': 0}  (3180 s)
+PASS Theorem 3 (full): no connected graph of order <= 11 has a root at -4, -6, -8, -10; no connected graph of order 12 has root -4
+EXIT 0 2026-11-27T10:07:52-08:00

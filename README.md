@@ -15,4 +15,4 @@ Corrections are welcome: open an issue.
 
 ## Licence
 
-Text: CC BY 4.0. Code: MIT.
+Text: CC BY 4.0. Code and data: MIT. See `LICENSE`.

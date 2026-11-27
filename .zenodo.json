@@ -1,0 +1,9 @@
+{
+  "title": "Integer domination roots and three-move subtraction games: two notes with verifiers",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "creators": [{"name": "Poonacha, Aryan"}],
+  "license": "cc-by-4.0",
+  "description": "Two short notes with complete proofs and verifiers. (1) -10 is a domination root of a connected graph; the integer domination roots in [-11,-1] are exactly -2,-4,-6,-8,-10; no graph on at most 12 vertices has domination root -4. (2) Manabe's Conjecture 52 on purely periodic three-move subtraction games holds for all b <= 2a, and for all b <= 250 with any c (computer-assisted). The results were found with AI systems directed by the author and checked by independent re-implementation and adversarial review; see each paper.",
+  "keywords": ["domination polynomial", "domination root", "subtraction game", "combinatorial game theory", "computer-assisted proof"]
+}
