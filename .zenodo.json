@@ -4,6 +4,6 @@
   "publication_type": "preprint",
   "creators": [{"name": "Poonacha, Aryan"}],
   "license": "cc-by-4.0",
-  "description": "Two short notes with complete proofs and verifiers. (1) -10 is a domination root of a connected graph; the integer domination roots in [-11,-1] are exactly -2,-4,-6,-8,-10; no graph on at most 12 vertices has domination root -4. (2) Manabe's Conjecture 52 on purely periodic three-move subtraction games holds for all b <= 2a, and for all b <= 250 with any c (computer-assisted). The results were found with AI systems directed by the author and checked by independent re-implementation and adversarial review; see each paper.",
+  "description": "Two short notes with complete proofs and verifiers. (1) -10 is a domination root of a connected graph; the integer domination roots in [-11,-1] are exactly -2,-4,-6,-8,-10; roots -4,-6,-8,-10 occur together in one connected graph with any prescribed multiplicities. (2) Manabe's Conjecture 52 on purely periodic three-move subtraction games holds for all b <= 2a, and for all b <= 250 with any c (computer-assisted). Each verifier recomputes its paper's computer-assisted claims from the definitions. AI systems (language models with computer search) were used to find the constructions and proofs, write the verification code and help draft the text. The author checked the results and is responsible for all content.",
   "keywords": ["domination polynomial", "domination root", "subtraction game", "combinatorial game theory", "computer-assisted proof"]
 }

@@ -8,7 +8,6 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \theoremstyle{definition}
 \newtheorem{remark}[theorem]{Remark}
-\newtheorem{example}[theorem]{Example}
 \numberwithin{equation}{section}
 
 \newcommand{\N}{\mathbb{N}}
@@ -29,12 +28,12 @@
 For the subtraction game $S=\{a,b,c\}$ with $2\le a<b<c$, $\gcd(a,b,c)=1$ and
 $c\ne a+b$, Manabe (arXiv:2609.05358) gave three tests on $\rho=c\bmod(a+b)$ that imply
 pure periodicity of the Sprague--Grundy sequence, and conjectured that they are also
-necessary (his Conjecture~52). We prove this for every $b\le 2a$ and every $c$: three
-explicit positions rule out every pure period. For fixed $a,b$, the P-position indicators at
-$c+j$ and $2c+j$, for $-(a+b)\le j<2(a+b)$, depend only on $c\bmod(a+b)$ when $c\ge2(a+b)$.
-This transfer, together with a finite witness search, proves the conjecture for every
-$b\le250$. We also show that a game failing all three tests with
-$c\ge 2b$ has no pure period $p\le c+b$.
+necessary (his Conjecture~52). We prove this for every $b\le 2a$ and every $c$: when $\rho$
+fails the tests, three explicit positions rule out every pure period. For fixed $a,b$, the
+P-position indicators at $c+j$ and $2c+j$, for $-(a+b)\le j<2(a+b)$, depend only on
+$c\bmod(a+b)$ when $c\ge2(a+b)$. This transfer, together with a finite witness search,
+proves the conjecture for every $b\le250$. We also show that a game failing all three tests
+with $c\ge 2b$ has no pure period $p\le c+b$.
 \end{abstract}
 
 \maketitle
@@ -43,114 +42,88 @@ $c\ge 2b$ has no pure period $p\le c+b$.
 
 In the subtraction game with move set $S$, a position is a heap of $x\in\N=\{0,1,2,\dots\}$
 tokens, a move removes $s\in S$ tokens with $s\le x$, and the player unable to move loses.
-We consider $S=\{a,b,c\}$ with $0<a<b<c$. Its Sprague--Grundy sequence is eventually
-periodic~\cite{Golomb}. Manabe~\cite{Manabe} gave a sufficient condition for it to be
-periodic from position~$0$ and conjectured that the condition is necessary.
+We consider $S=\{a,b,c\}$ with $0<a<b<c$. The Sprague--Grundy value $G_S(x)$ is the least
+nonnegative integer not among the values $G_S(x-s)$, $s\in S$, $s\le x$, and the
+P-positions $W_0(S)$ are the zeros of $G_S$. The sequence $G_S$ is eventually
+periodic~\cite{Golomb}; it is \emph{purely periodic} if it is periodic from position~$0$.
+Manabe~\cite{Manabe} gave a sufficient condition for pure periodicity and conjectured that
+it is necessary.
 
 \subsection{The conjecture}
-The following excerpts are from Manabe~\cite{Manabe}, version~2 (16 September 2026).
-Section labels and editorial insertions appear in brackets; citations are omitted.
-Here $[u,v)=\{u,\dots,v-1\}$ denotes an integer interval.
-
-\begin{quote}\small
-Its nim-value $G_S(x)$ is the least non-negative integer absent from the values of its
-options, so $G_S(x)\in\{0,1,2,3\}$. The zero set $W_0(S)$ consists of the losing, or
-P-positions. The nim-sequence is eventually periodic: $G_S(x+p)=G_S(x)$ for all
-$x\geqslant q$. Taking $p\geqslant 1$ minimal and then $q\geqslant 0$ minimal defines the
-period $p(S)$ and pre-period $q(S)$. Pure periodicity means $q=0$; we call the case $q>0$
-pre-periodic. [\dots] We therefore focus on primitive rulesets ($\gcd(a,b,c)=1$) with
-$2\leqslant a<b<c$ and $c\neq a+b$. [\S1]
-
-[\S2] Let $B=S\setminus\{c\}=\{a,b\}$ and $\rho=c \bmod (a+b)$. [\dots] write
-$\delta=b-a=\eta a+\varepsilon$, $\eta=\lfloor\delta/a\rfloor$, $0\leqslant\varepsilon<a$.
-[\dots, Proposition 7] $\Z:=W_0(B)\cap[0,a+b)$ [\dots]
-
-[\S3] [\dots] Translates of $\Z$ are read modulo $a+b$. [\dots] Let
-$D=[a,b)\setminus W=[a,b)\setminus\Z$ be the base gaps below $b$. [Here $W=W_0(B)$.] [\dots]
+Write $[u,v)=\{u,\dots,v-1\}$, and put $m=a+b$, $\delta=b-a=\eta a+\varepsilon$ with
+$0\le\varepsilon<a$, and $\rho=c\bmod m$. Let $\Z\subseteq\mathbb{Z}/m\mathbb{Z}$ be the set
+of P-positions in $[0,m)$ of the two-move game $B=\{a,b\}$, let $D=[a,b)\setminus\Z$, and let
 \[
 \Lambda=\begin{cases}\bigl[(\eta+1)a,\,(\eta+1)a+\varepsilon\bigr), & \eta \text{ even},\\
-\bigl[\eta a+\varepsilon,\,(\eta+1)a\bigr), & \eta\text{ odd}.\end{cases}
-\qquad\textup{(formula (4))}
+\bigl[\eta a+\varepsilon,\,(\eta+1)a\bigr), & \eta\text{ odd}\end{cases}
 \]
-[\dots] \textsc{Definition 19.} Let $\rho\in\mathbb{Z}/(a+b)\mathbb{Z}$. We say that $\rho$ is
-admissible for the period $P$, and write $\rho\in\Th{P}$, in the following three cases.
+(Manabe's formula~(4)); all these sets are read modulo~$m$. Manabe's Definition~19
+(version~2, 16 September 2026) says that $\rho$ is \emph{admissible for the period $P$},
+written $\rho\in\Th{P}$, in three cases:
 \begin{align*}
 &(\mathrm{T0})\quad \rho\in\Th{a+b} :\Longleftrightarrow \Z\cap(\Z+\rho)=\varnothing;\\
 &(\mathrm{T1})\quad \rho\in\Th{c+a} :\Longleftrightarrow \Z\cap[0,\delta)\cap\bigl(\Z+(\delta-\rho)\bigr)=\varnothing;\\
 &(\mathrm{T2})\quad \rho\in\Th{c+b} :\Longleftrightarrow (\rho+\Lambda)\cap\Z=\varnothing \text{ and } (\rho+D)\cap\Lambda=\varnothing.
 \end{align*}
-All three are conditions on the angle alone; none of them involves $c$ beyond its residue.
-
+We call $\rho$ (and $S$) \emph{admissible} if $\rho\in\Th{a+b}\cup\Th{c+a}\cup\Th{c+b}$.
+Manabe's Theorem~34 (Theorem~\ref{thm:34} below) proves that admissible games are purely
+periodic, with the least admissible period. His Conjecture~52 is the converse:
+\begin{quote}\small
 \textsc{Conjecture 52.} Let $a\geqslant 2$, $\gcd(a,b,c)=1$ and $c\neq a+b$. Then $G_S$ is
 purely periodic if and only if the angle is admissible for at least one candidate period,
-that is, if and only if
-\[\rho\in\Th{a+b}\cup\Th{c+a}\cup\Th{c+b},\]
-and in that case the least period is the least admissible one,
-\[p=\min\{P\in\{a+b,c+a,c+b\}:\rho\in\Th{P}\}.\]
-Only necessity remains open; sufficiency and the least-period formula follow from Theorem 34.
+that is, if and only if $\rho\in\Th{a+b}\cup\Th{c+a}\cup\Th{c+b}$, and in that case the least
+period is the least admissible one, $p=\min\{P\in\{a+b,c+a,c+b\}:\rho\in\Th{P}\}$.
 \end{quote}
-
-The sets $\Lambda$ and $D$ in (T2) are read modulo $a+b$ as well. Manabe's \S6 also states
-Conjecture~56 (under the same hypotheses, the least period of a purely periodic $G_S$ is
-one of $a+b$, $c+a$, $c+b$) and Conjecture~57 (if the least period is $c+a$, resp.\
-$c+b$, then $\rho\in\Th{c+a}$, resp.\ $\rho\in\Th{c+b}$).
+He also states Conjecture~56 (under the same hypotheses, the least period of a purely
+periodic $G_S$ is one of $a+b$, $c+a$, $c+b$) and Conjecture~57 (if the least period is
+$c+a$, resp.\ $c+b$, then $\rho\in\Th{c+a}$, resp.\ $\rho\in\Th{c+b}$).
 
 \subsection{Prior work}
-We summarize results on the necessity direction and related period classifications.
 \begin{itemize}
+\item Manabe (v1 4 September, v2 16 September 2026)~\cite{Manabe} proved Theorem~34 and, when
+$c\ge2(a+b)$, that a purely periodic $G_S$ with least period $p\le a+b$ has
+$\rho\in\Th{a+b}$ (his Proposition~55).
 \item S.~Zhang~\cite[Prop.~3.1]{SZhang} determined the pre-period and period on the line
-$b=2a$; with Manabe's Theorem~34 this proves Conjecture~52 there, as noted
-in~\cite[\S6]{Manabe}. S.~Zhang~\cite[Prop.~4.1]{SZhang} also classified $b=a+1$, where
-every angle is admissible. Three ultimately bipartite families~\cite[Thm.~6.3]{SZhang} and the
-subfamily $b=a+2$ with $a$ odd are also known~\cite[\S6]{Manabe}.
-\item Mikl\'os and Post~\cite{MP} proved that moves larger than a pure outcome period are
-redundant~\cite[Prop.~2.9]{MP}, and gave a finite test for the outcome period
-$b+c$~\cite[Cor.~2.12.1]{MP}.
-\item Moriwaki (10 June 2026)~\cite[Thm.~3]{Moriwaki} treated real parameters with
-$b\le 2a$. On his ``white regions'' he proved that none of $a+b$, $c+a$, $c+b$ is a pure
-period, and conjectured that no pure period exists~\cite[Remark~5, \S5(1)]{Moriwaki}.
-For integer parameters the white regions are exactly the non-admissible games with
-$b\le 2a$ (Remark~\ref{rem:moriwaki}).
-\item Manabe (v1 4 September, v2 16 September 2026)~\cite{Manabe} proved sufficiency and the
-least-period formula (his Theorem~34), proved necessity for least periods
-$p\le a+b$ when $c\ge 2(a+b)$ (his Proposition~55), and posed Conjectures~52, 56 and~57.
-\item Later work gave exact nim-value words or period formulas for individual families:
-$\{2,5,c\}$ with $c\ne7$ (Zeng, 8 September~\cite{Zeng}), $\{2,b,2b-6\}$ with odd $b\ge7$
-(Jo, 9 September~\cite{Jo}), primitive $\{a,4a,c\}$ with $a\ge2$ and $c>4a$ (AI-generated
-preprint, 15 October~\cite{A4AC}), $\{a,3a-1,c\}$ with $a\ge3$ and $c>(a-1)(4a-1)$ and
-$\{6,17,119+23k\}$ with $k\ge0$ (Brink, 23 November~\cite{Brink1,Brink2}), and
-$\{3,8,11k+7\}$ with $k\ge1$ (Cameron-Lyons, 23 November~\cite{CL}).
+$b=2a$; with Theorem~34 this proves Conjecture~52 there~\cite[\S6]{Manabe}. He also
+classified $b=a+1$, where every angle is admissible~\cite[Prop.~4.1]{SZhang}.
+\item Mikl\'os and Post proved that moves larger than a pure outcome period are
+redundant~\cite[Prop.~2.9]{MP}.
+\item Moriwaki (10 June 2026) treated real parameters with $b\le 2a$. On his ``white
+regions'', which for integers are exactly the non-admissible games with $b\le 2a$
+(Remark~\ref{rem:moriwaki}), none of $a+b$, $c+a$, $c+b$ is a pure
+period~\cite[Thm.~3]{Moriwaki}; he conjectured that no pure period
+exists~\cite[Remark~5, \S5(1)]{Moriwaki}.
 \item Levinstein (25 November 2026)~\cite{Levinstein} proved Conjecture~57 in a stronger
-form, with a Lean formalization: for all $1\le a<b<c$ and $P\in\{a+b,c+a,c+b\}$, the
-P-positions are periodic from~$0$ with period $P$ if and only if $\rho\in\Th{P}$. Hence,
-under the hypotheses of Conjecture~52, it is equivalent to Conjecture~56. He also excluded periods
-$p\in(c-a,c+a)$ \cite[Prop.~3.1]{Levinstein}, and reported a search of 100{,}946{,}926
-triples with bounded $c$ without counterexample. H.~Zhang (26 November 2026)~\cite{HZhang}
-gave a second proof of Conjecture~57 by a reflection argument, also with Lean.
+form, with Lean: for all $1\le a<b<c$ and $P\in\{a+b,c+a,c+b\}$, the P-positions are
+periodic from~$0$ with period $P$ if and only if $\rho\in\Th{P}$; so under the
+hypotheses of Conjecture~52, Conjecture~52 is equivalent to Conjecture~56. He also proved that
+a period $p$ of the P-positions from~$0$ has $p\notin(c-a,c+a)$, and that $\rho\in\Th{a+b}$
+if $c\ge p+m-\gcd(p,m)$ \cite[Prop.~3.1]{Levinstein}, and reported a search of
+100{,}946{,}926 triples with bounded $c$ without counterexample. H.~Zhang (26 November 2026)~\cite{HZhang} gave a
+second proof of Conjecture~57, also with Lean.
+\item Exact nim-value words or period formulas are known for several families:
+$\{2,5,c\}$, $c\ne7$ \cite{Zeng}; $\{4,6,10k+1\}$ \cite{XZeng}; $\{2,b,2b-6\}$, $b\ge7$
+odd \cite{Jo}; primitive $\{a,4a,c\}$ \cite{A4AC}; $\{a,3a-1,c\}$ and $\{6,17,119+23k\}$
+\cite{Brink1,Brink2}; $\{6,17,c\}$, $c\ge116$ \cite[Thm.~12]{Pan}; $\{3,8,11k+7\}$
+\cite{CL} and $\{3,8,11k+1\}$ \cite{CL1}. They give more than pure periodicity. For
+Conjecture~52 alone, the members with $b\le250$ fall under Theorem~\ref{thm:250}: for
+example, the non-admissible games $\{4,6,10k+1\}$ ($\rho=1<\delta=2$, also
+Theorem~\ref{thm:band}), $\{3,8,11k+1\}$ ($\rho=1$) and the ten non-admissible residue
+classes of $\{6,17,c\}$.
 \end{itemize}
 
 \subsection{Results}
-\begin{itemize}
-\item \emph{Conjecture~52 holds whenever $b\le 2a$} (Theorem~\ref{thm:band}). If $b\le 2a$
-and $\rho$ is not admissible, three explicit positions show that neither $G_S$ nor the set of
-P-positions is periodic from~$0$, with any period. Manabe lists this region as open apart
-from the cases above; the line $b=2a$ was known~\cite[Prop.~3.1]{SZhang}.
-\item \emph{Conjecture~52 holds for every $b\le 250$ and every $c$} (Theorem~\ref{thm:250},
-computer-assisted). The key step is a transfer lemma (Lemma~\ref{lem:transfer}): for fixed
-$a,b$, the P-position indicators at $c+j$ and $2c+j$, $-(a+b)\le j<2(a+b)$, depend only on
-$c\bmod(a+b)$ once $c\ge 2(a+b)$.
-\item \emph{Towards Conjecture~56:} if $c\ge 2b$ and $\rho$ is not admissible, the
-P-positions have no period $p\le c+b$ from~$0$ (Proposition~\ref{prop:cb}).
-\end{itemize}
-Theorems~\ref{thm:band} and~\ref{thm:250} use the obstruction in Lemma~\ref{lem:witness}.
-Conjecture~52 remains open for
-$b>\max(2a,250)$, and Conjecture~56 remains open.
+Only necessity is new; sufficiency is Manabe's Theorem~34. Theorem~\ref{thm:band} proves
+Conjecture~52 for every $b\le2a$ (the line $b=2a$ was known), and Theorem~\ref{thm:250}
+for every $b\le250$ (computer-assisted). Proposition~\ref{prop:cb} excludes periods
+$p\le c+b$ when $c\ge2b$ and $\rho$ is not admissible. Conjecture~52 remains open for $b>\max(2a,250)$, and
+Conjecture~56 remains open.
 
 \section{Definitions and known results}
 
-Throughout, $S=\{a,b,c\}$ with $1\le a<b<c$; further hypotheses are stated where needed. Put
-$m=a+b$, $\delta=b-a$ and $\rho=c\bmod m\in[0,m)$, and let $Y\colon\N\to\{0,1\}$ be the
-indicator of the P-positions $W_0(S)$. Then
+Throughout, $S=\{a,b,c\}$ with $1\le a<b<c$; further hypotheses are stated where needed.
+With $m$, $\delta$ and $\rho\in[0,m)$ as in \S1, let $Y\colon\N\to\{0,1\}$ be the indicator of
+the P-positions $W_0(S)$. Then
 \begin{equation}\label{eq:rec}
 Y(x)=1\iff Y(x-s)=0\text{ for every }s\in S\text{ with }s\le x,
 \end{equation}
@@ -168,8 +141,7 @@ $x\mapsto x+a$.
 
 A function $f$ on $\N$ is \emph{periodic from $0$ with period $p\ge1$} if $f(x+p)=f(x)$ for
 all $x\ge0$. Thus $G_S$ is purely periodic exactly when it is periodic from~$0$. Every period
-of $G_S$ from~$0$ is a period of $Y$ from~$0$. We call $\rho$ (and $S$) \emph{admissible} if
-$\rho\in\Th{a+b}\cup\Th{c+a}\cup\Th{c+b}$.
+of $G_S$ from~$0$ is a period of $Y$ from~$0$.
 
 We use three known results.
 
@@ -273,48 +245,35 @@ $S$ with $b\le 2a$.
 \end{theorem}
 
 \begin{proof}
-If $k=0$ then $c=\rho<\delta<b$, which is false; so $k\ge1$. Write $F(u)=Y(c+u)$ for
-$u\ge-c$. We claim that for $0\le u<c$,
-\begin{equation}\label{eq:H}
-F(u)=1\iff u\bmod m\in H,\qquad H=[a,\,b-\rho)\ \cup\ [b,\,2a)\ \cup\ [m-\rho,\,m).
-\end{equation}
-Here $H\subseteq[a,m)$, and $[b,2a)$ is empty when $b=2a$. Let $0\le u<c$. The options of
-$c+u$ are $u$, $c+u-a$ and $c+u-b$, and $Y(u)=z(u)=1$ exactly when $u\bmod m<a$.
-Therefore
+If $k=0$ then $c=\rho<\delta<b$, which is false; so $k\ge1$. Recall $z(x)=1$ exactly when
+$x\bmod m<a$. Write $F(u)=Y(c+u)$ for $u\ge-c$; for $u<0$, $F(u)=z(c+u)$
+by~\eqref{eq:below}, and $c+u\equiv\rho+u\pmod m$. Let $0\le u<c$. The options of $c+u$ are
+$u$, $c+u-a$ and $c+u-b$, and $Y(u)=z(u)$. Therefore
 \begin{equation}\label{eq:Frec}
 \begin{cases}
 F(u)=0, & u\bmod m<a,\\
 F(u)=1\iff F(u-a)=F(u-b)=0, & u\bmod m\ge a.
 \end{cases}
 \end{equation}
+All offsets $u$ below are in $[0,c)$.
 
-\emph{First block, $0\le u<m$.} For $u<a$, $F(u)=0$. For $a\le u<b$ we have
-$u-a\in[0,\delta)\subseteq[0,a)$, so $F(u-a)=0$, while $c+u-b<c$ has value
-$z(c+u-b)$ by~\eqref{eq:below}; note $c+u-b\equiv\rho+u-b$ and
-$\rho+u-b\in[\rho-\delta,\rho)$. If $u\ge b-\rho$, this residue lies in
-$[0,\rho)\subseteq[0,a)=\Z$, so the option is a P-position and $F(u)=0$. If $u<b-\rho$, the
-residue is $\rho+u-b+m=\rho+u+a\in[2a,m)$, outside $\Z$, and $F(u)=1$. For $b\le u<m$ we have
-$u-b\in[0,a)$, so $F(u-b)=0$ and $F(u)=1-F(u-a)$ with $u-a\in[\delta,b)$. If $u<2a$ then
-$u-a<a$ and $F(u)=1$; if $u\ge2a$ then $u-a\in[a,b)$ and $F(u)=1$ if and only if
-$u-a\ge b-\rho$, that is, $u\ge m-\rho$. This proves~\eqref{eq:H} for $u<m$; note $m<c$, as $k\ge1$ and $\rho\ge1$.
+(i) $F(b-1)=0$: the residue $b-1$ is at least $a$, and $F(-1)=z(c-1)=1$ because
+$c-1\equiv\rho-1\in[0,a)$.
 
-\emph{Later offsets, $m\le u<c$.} Now $u-a$ and $u-b$ are offsets in $[0,u)$, with residues
-$x-a$ and $x+a$, where $x=u\bmod m$. By~\eqref{eq:Frec} and induction on $u$ it suffices to
-check that for every $x\in[a,m)$,
-\[
-x\in H\iff (x-a)\bmod m\notin H\ \text{and}\ (x+a)\bmod m\notin H .
-\]
-If $a\le x<b$, then $x-a\in[0,a)$, and $x+a\in[2a,m)$ lies in $H$ exactly when $x\ge b-\rho$.
-If $b\le x<2a$, then $x-a\in[\delta,a)$ and $(x+a)\bmod m=x-b\in[0,a)$, neither in $H$. If
-$2a\le x<m$, then $x-a\in[a,b)$ lies in $H$ exactly when $x<m-\rho$, and
-$(x+a)\bmod m=x-b\in[0,a)$. In each case the right side agrees with $x\in H$, which
-proves~\eqref{eq:H}.
+(ii) $F(b-\rho-1)=1$: the offset $b-\rho-1$ lies in $[a,b)$ because $1\le\rho\le\delta-1$;
+$F(\delta-\rho-1)=0$ because $0\le\delta-\rho-1<a$; and $F(-\rho-1)=z(c-\rho-1)=0$ because
+$c-\rho-1\equiv m-1\ge a$.
+
+(iii) For $1\le j<k$, the offset $jm-1$ has residue $m-1\ge a$, and its option offset
+$jm-1-b=(j-1)m+a-1$ has residue $a-1$; so $F(jm-1)=1-F((j-1)m+b-1)$. The offset
+$jm+b-1<km\le c$ has residue $b-1\ge a$, and its option offset $jm+b-1-a=jm+\delta-1$ has
+residue $\delta-1<a$; so $F(jm+b-1)=1-F(jm-1)=F((j-1)m+b-1)$. With (i),
+$F((k-1)m+b-1)=F(b-1)=0$.
 
 \emph{The witness.} We have $y=(k-1)m+b-1\ge0$ and $y<km\le c$. Since $y\bmod m=b-1\ge a$,
-$Y(y)=z(y)=0$. Next $b-1\notin H$: $b-1\ge b-\rho$ as $\rho\ge1$, and $b-1<m-\rho$ as
-$\rho<\delta\le a$. So $Y(y+c)=F(y)=0$. Finally $y+m=km+b-1=c+(b-\rho-1)$, and
-$b-\rho-1\in[a,b-\rho)$ because $\rho\le\delta-1$; so $Y(y+m)=1$. This is a witness with
-$s=c$ and $h=a+b=m$, and Lemma~\ref{lem:witness} applies.
+$Y(y)=z(y)=0$. Next $Y(y+c)=F(y)=0$ by (iii). Finally $y+m=km+b-1=c+(b-\rho-1)$, so
+$Y(y+m)=1$ by (ii). This is a witness with $s=c$ and $h=a+b=m$, and Lemma~\ref{lem:witness}
+applies.
 
 For the last statement, let $S$ satisfy the hypotheses of Conjecture~52 with $b\le2a$. If
 $\rho$ is admissible, Theorem~\ref{thm:34} applies. Otherwise $1\le\rho\le\delta-1$ by
@@ -323,11 +282,6 @@ Lemma~\ref{lem:angles}, and $G_S$ is not purely periodic.
 
 The first part of Theorem~\ref{thm:band} does not use primitivity, and its hypothesis forces
 $a\ge\delta\ge2$ and $c\ne a+b$.
-
-\begin{example}
-For $S=\{5,8,28\}$: $m=13$, $\delta=3$, $\rho=2$, $k=2$, $y=20$. The positions $20$ and $48$
-are N-positions and $33$ is a P-position, so no pure period exists.
-\end{example}
 
 \begin{remark}[Moriwaki's white regions]\label{rem:moriwaki}
 In~\cite{Moriwaki} the largest move is normalized to~$1$. The $n$-th white region is
@@ -436,7 +390,7 @@ $2a<b\le250$; the program checks all bases anyway.
 \section{Periods up to \texorpdfstring{$c+b$}{c+b}}
 
 \begin{proposition}\label{prop:cb}
-Let $1\le a<b<c$ with $c\ge 2b$, and suppose $\rho$ is non-admissible. Then $Y$ has no
+Let $2\le a<b<c$ with $c\ge 2b$, and suppose $\rho$ is non-admissible. Then $Y$ has no
 period $p\le c+b$ from~$0$. The same exclusion holds for $G_S$.
 \end{proposition}
 
@@ -445,7 +399,7 @@ Note $c\ge2b>a+b$. If $b\le2a$, Lemma~\ref{lem:angles} and Theorem~\ref{thm:band
 $Y$ has period $p\le c+b$ from~$0$. If $p\le c$, Lemma~\ref{lem:deletion} gives
 $\rho\in\Th{a+b}$, a contradiction. So $c<p\le c+b$; put $d=p-c\in[1,b]$.
 
-No two P-positions differ by $d$: if $Y(x)=Y(x+d)=1$, then $Y(x+p)=1$ and
+No two P-positions differ by $d$ (compare~\cite[Lemma~2.3]{Levinstein}): if $Y(x)=Y(x+d)=1$, then $Y(x+p)=1$ and
 $(x+p)-(x+d)=c$, contradicting~\eqref{eq:rec}. Let $z_0\in\Z$. Then $z_0<b$ and
 $z_0+d<2b\le c$, so $Y(z_0)=z(z_0)=1$ and $Y(z_0+d)=z(z_0+d)$ by~\eqref{eq:below}. Hence
 $(z_0+d)\bmod m\notin\Z$ for every $z_0\in\Z$, that is, $\Z\cap(\Z+d)=\varnothing$ and
@@ -458,89 +412,69 @@ $1\le d\le b<m$, we get $d\in\{a,b\}$, so $p\in\{c+a,c+b\}$, and Theorem~\ref{th
 $\rho\in\Th{p}$, again a contradiction.
 \end{proof}
 
-\begin{remark}
-Manabe's Proposition~55 excludes least periods $p\le a+b$ when $c\ge2(a+b)$, and
-Levinstein~\cite[Prop.~3.1]{Levinstein} excludes $p\in(c-a,c+a)$ for all $c$.
-Under the hypotheses of Conjecture~52, any counterexample with $c\ge2b$ has least period
-larger than $c+b$. The proof uses the complementary-difference condition (see
-Manabe~\cite[\S3]{Manabe} and Levinstein~\cite[Lemma~2.3]{Levinstein}) on the unchanged
-two-move prefix to force $(p-c)\bmod m\in\Th{a+b}$.
-\end{remark}
-
 \section{Computational certificates}\label{sec:cert}
 
-All computations are reproduced by \texttt{verify.py}, a Python~3 program that uses only the
-standard library and is available at
-\url{https://github.com/Aryan-Poonacha/math-findings} (directory
-\texttt{subtraction-games}). It computes P-positions from~\eqref{eq:rec}, in blocks
-of $a$ consecutive positions with exact integer bit operations, and compares the bit-parallel
-generator with mex on the first row's finite range. It computes $\Z$ from the two-move recurrence, $\Lambda$ from formula~(4), and the
-sets $\Th{P}$ literally from Definition~19. It reads no stored results; any mismatch stops it
-with an error. Table~\ref{tab:checks} lists the checks.
+Only Theorem~\ref{thm:250} is computer-assisted; \texttt{python3 -B verify.py --full}
+reproduces its two finite parts. The program \texttt{verify.py}, in the directory
+\texttt{subtraction-games} of the repository in the address, uses only the Python~3
+standard library. It computes P-positions from~\eqref{eq:rec}, in blocks of $a$ consecutive positions with
+exact integer bit operations, and checks this generator against the mex rule (first row of
+Table~\ref{tab:checks}). It computes $\Z$ from the two-move recurrence, $\Lambda$ from
+formula~(4), and the sets $\Th{P}$ literally from Definition~19. It reads no stored results;
+any mismatch stops it with an error. Table~\ref{tab:checks} lists the checks; on the
+hand-proved results they are finite-range tests only.
 
 \begin{table}[!ht]
 \small
 \caption{Checks in \texttt{verify.py}; ranges in the default mode and with \texttt{--full}.}
 \label{tab:checks}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.43\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}@{}}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.55\textwidth}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.19\textwidth}@{}}
 \toprule
 Check & default & \texttt{--full}\\
 \midrule
-Bit-parallel recurrence equals the zero set of the mex rule & $1\le a\le29$,
-$a<b<c\le40$, $0\le x<3c+7$ & $1\le a\le29$, $a<b<c\le40$, $0\le x<3c+7$\\
-Manabe's box (primitive non-additive triples, $2\le a\le8$, $b\le40$, $c\le100$): exact
-nim cycles; 7{,}557 admissible games pure with the predicted least period, 7{,}828
-non-admissible games not pure, each with a witness; no witness in any pure game, with
-witness search $0\le y<5c-m$ & all & all\\
-Lemma~\ref{lem:angles}; formula~\eqref{eq:H} and the witness of Theorem~\ref{thm:band}
-for $k=1,2,3$ & $b\le100$; $a\le25$ & $b\le250$; $a\le40$\\
-Lemma~\ref{lem:transfer}: identical windows for $k=2,3,4,5$ & $b\le30$, all $r$, $a\ge1$
+Bit-parallel recurrence equals the mex rule, $0\le x<3c+7$ & \multicolumn{2}{l}{$a<b<c\le40$}\\
+Manabe's box, primitive non-additive, $2\le a\le8$, $b\le40$, $c\le100$: exact nim cycles
+match the criterion (7{,}557 pure, 7{,}828 not); a witness, with $0\le y<5c-m$, in every
+non-pure game and in no pure one & \multicolumn{2}{l}{all}\\
+2{,}000 random admissible primitive non-additive games with $40<b\le250$, $b<c<4m$: exact
+nim cycles pure with the predicted least period & \multicolumn{2}{l}{all}\\
+Lemma~\ref{lem:angles} & $b\le100$ & $b\le250$\\
+The witness of Theorem~\ref{thm:band}, $k=1,2,3$ & $a\le25$ & $a\le40$\\
+Lemma~\ref{lem:transfer}: identical windows for $k=2,\dots,5$, all $r$, $a\ge1$ & $b\le30$
 & $b\le60$\\
-Theorem~\ref{thm:250}, $c\ge2m$: class witnesses at $c_0=2m+r$ & $b\le100$, plus direct
-recheck at $k=3,4$ & $b\le250$, plus direct recheck at $k=3$\\
+Theorem~\ref{thm:250}, $c\ge2m$: class witnesses at $c_0=2m+r$; direct recheck at $k=3$
+(default also $k=4$) & $b\le100$ & $b\le250$\\
 Theorem~\ref{thm:250}, $b<c<2m$: direct witnesses & $b\le100$ & $b\le250$\\
-Angle facts used in Proposition~\ref{prop:cb} & $2\le a<b\le100$ & $2\le a<b\le250$\\
+Angle facts used in Proposition~\ref{prop:cb} & $b\le100$ & $b\le250$\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 The full run asserts the four counts in the proof of Theorem~\ref{thm:250}. The direct
-rechecks evaluate the transferred witnesses at $c=3m+r$ (and, in the default mode, at
-$c=4m+r$) without using
-Lemma~\ref{lem:transfer}. With 16 processes and Python~3.12 the default mode takes about
-10 seconds and the full mode about 70 seconds (8 minutes of processor time); the full log is
+rechecks evaluate the transferred witnesses without using Lemma~\ref{lem:transfer}. With 16
+processes and Python~3.12 the default mode takes about
+10 seconds and the full mode about a minute (8 minutes of processor time); the full log is
 \texttt{logs/verify-full.log}.
-
-The same four counts were obtained independently by a C++ program written from the
-definitions during the audit described in Section~\ref{sec:ai}.
 
 \section{Open questions}
 
 \begin{enumerate}
 \item Conjecture~52 for $b>\max(2a,250)$. For a fixed base, Lemma~\ref{lem:transfer}
 reduces it to finitely many games whenever each non-admissible class has a witness in the
-window of the lemma, as happens for $b\le250$. One approach for $b>2a$ is to describe the
-first affected block and the set $H$ of Lemma~\ref{lem:transfer} explicitly.
+window of the lemma, as happens for $b\le250$.
 \item Under the hypotheses of Conjecture~52, does every game that fails (T0)--(T2) have a
 witness in the sense of Lemma~\ref{lem:witness}? The certificate finds one for each
 non-admissible game in its range.
 \item Conjecture~56 when $b<c<2b$ or $p>c+b$ (compare Proposition~\ref{prop:cb}).
 \item Moriwaki's conjecture~\cite[Remark~5]{Moriwaki} at irrational points of the white
-regions, and his assertion there that each white region splits into infinitely many parts.
+regions.
 \end{enumerate}
 
-\section{Use of AI and verification}\label{sec:ai}
+\section*{Acknowledgements}
 
-The author used AI systems for mathematical exploration, programming, drafting and checking.
-A separate model-assisted audit compared the proofs with Manabe's preprint and recomputed the
-certificate counts with an independent implementation. The author takes responsibility for
-the results and the text.
-
-The proofs of Lemmas~\ref{lem:witness} and~\ref{lem:transfer}, Theorem~\ref{thm:band} and
-Proposition~\ref{prop:cb} are not computer-assisted; \texttt{verify.py} checks them only on
-the finite ranges of Table~\ref{tab:checks} (\texttt{python3 -B verify.py}). The proof of
-Theorem~\ref{thm:250} is computer-assisted: its two finite parts are reproduced by
-\texttt{python3 -B verify.py --full}, and the default mode reproduces them for $b\le100$.
+AI systems (language models with computer search) were used to find the constructions and
+proofs, write the verification code and help draft the text. The author checked the results
+and is responsible for all content.
 
 \begin{thebibliography}{99}
 \raggedright
@@ -556,8 +490,14 @@ $\{6,17,119+23k\}$}, Zenodo, 23 November 2026,
 \href{https://doi.org/10.5281/zenodo.24485055}{doi:10.5281/zenodo.24485055}.
 
 \bibitem{CL}
-Cameron-Lyons (GitHub user), \emph{formal-math-lab}, directory \texttt{manabe-residue-seven}
-(Lean), 23 November 2026, \url{https://github.com/Cameron-Lyons/formal-math-lab}, accessed
+C.~Lyons, \emph{formal-math-lab}, directory \texttt{manabe-residue-seven} (Lean),
+23 November 2026, \url{https://github.com/Cameron-Lyons/formal-math-lab}, accessed
+27 November 2026.
+
+\bibitem{CL1}
+C.~Lyons, \emph{Manabe's subtraction game with moves 3, 8, and $11k+1$}, \emph{formal-math-lab},
+directory \texttt{manabe-residue-one} (proof and Lean), 27 November 2026,
+\url{https://github.com/Cameron-Lyons/formal-math-lab/tree/main/manabe-residue-one}, accessed
 27 November 2026.
 
 \bibitem{A4AC}
@@ -595,6 +535,25 @@ numbers follow \href{https://arxiv.org/abs/2312.02426v1}{arXiv:2312.02426v1}.
 Y.~Moriwaki, \emph{Subtraction Nim with continuous parameters}, preprint,
 \href{https://arxiv.org/abs/2606.11658v1}{arXiv:2606.11658v1}, 2026.
 
+\bibitem{Pan}
+Y.~Pan, \emph{Quadratic periods after adjoining one move to a fixed subtraction game},
+preprint, \href{https://arxiv.org/abs/2611.31336v1}{arXiv:2611.31336v1}, 23 November 2026.
+
+\bibitem{XZeng}
+X.~Zeng, \emph{Exact preperiod on the even boundary family $\{4,6,10K+1\}$}, manuscript,
+16 September 2026, repository \url{https://github.com/ArtificialZeng/AI-Has-Taste}, commit
+\texttt{f3ae144}, \texttt{BigWIN2/BW2-B65-P01}, accessed 27 November 2026.
+
+\bibitem{Zeng}
+Z.~Zeng, \emph{Pure periodicity for the three-move subtraction games $\{2,5,c\}$}, Zenodo,
+8 September 2026,
+\href{https://doi.org/10.5281/zenodo.22661435}{doi:10.5281/zenodo.22661435}.
+
+\bibitem{HZhang}
+H.~Zhang, \emph{Pair-sum periods in three-move subtraction games}, manuscript with Lean
+formalization, 26 November 2026,
+\url{https://github.com/Z-bitlance/three-move-subtraction-periods}, accessed 27 November 2026.
+
 \bibitem{SZhang}
 S.~Zhang, \emph{On the linearity of the periods of subtraction games}, Theoret. Comput. Sci.
 \textbf{985} (2024), 114350,
@@ -602,16 +561,6 @@ S.~Zhang, \emph{On the linearity of the periods of subtraction games}, Theoret. 
 numbers follow the
 \href{https://zhangshenxing.github.io/publications/Zhang2024tcs\%20On\%20the\%20linearity\%20of\%20the\%20periods\%20of\%20subtraction\%20games.pdf}{author's
 copy}.
-
-\bibitem{HZhang}
-H.~Zhang, \emph{Pair-sum periods in three-move subtraction games}, manuscript with Lean
-formalization, 26 November 2026,
-\url{https://github.com/Z-bitlance/three-move-subtraction-periods}, accessed 27 November 2026.
-
-\bibitem{Zeng}
-Z.~Zeng, \emph{Pure periodicity for the three-move subtraction games $\{2,5,c\}$}, Zenodo,
-8 September 2026,
-\href{https://doi.org/10.5281/zenodo.22661435}{doi:10.5281/zenodo.22661435}.
 
 \end{thebibliography}
 

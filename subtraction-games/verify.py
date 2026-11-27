@@ -12,6 +12,7 @@ admissible angle sets from Manabe's Definition 19.  No stored result is read.
 Any mismatch raises AssertionError (non-zero exit).  Each claim prints one PASS line.
 """
 import os
+import random
 import sys
 import time
 from math import gcd
@@ -184,27 +185,41 @@ def check_box():
 
 
 def check_theorem1(amax):
-    """Formula (3.1) and the witness of Theorem 3.2, plus Example 3.3."""
+    """The witness of Theorem 3.2."""
     n = 0
     for a in range(2, amax + 1):
         for b in range(a + 2, 2 * a + 1):
             m, delta = a + b, b - a
             for r in range(1, delta):
-                hset = interval(a, b - r) | interval(b, 2 * a) | interval(m - r, m)
                 for k in (1, 2, 3):
                     c = k * m + r
-                    length = 2 * c + m
-                    bits = outcome_bits(a, b, c, length)
-                    reps = c // m + 1
-                    periodic = sum(hset << (i * m) for i in range(reps)) & interval(0, c)
-                    assert (bits >> c) & interval(0, c) == periodic, (a, b, c)
-                    y = k * m - a - 1
-                    assert holds(bits, a, b, c, y, c), (a, b, c)
+                    bits = outcome_bits(a, b, c, 2 * c + m)
+                    assert holds(bits, a, b, c, k * m - a - 1, c), (a, b, c)
                     n += 1
-    bits = outcome_bits(5, 8, 28, 100)
-    assert [bits >> x & 1 for x in (20, 48, 33)] == [0, 0, 1]
-    return (f"formula (3.1) for all 0 <= u < c and witness y = km-a-1 on {n:,} cases "
-            f"(a <= {amax}, k = 1,2,3); example (5,8,28)")
+    return f"witness y = km-a-1, s = c on {n:,} cases (a <= {amax}, k = 1,2,3)"
+
+
+def sample_task(t):
+    a, b, c = t
+    m = a + b
+    flags = [x >> (c % m) & 1 for x in admissible(a, b)]
+    q, p = nim_cycle(a, b, c)
+    assert q == 0 and p == min(P for P, f in zip((m, c + a, c + b), flags) if f), (a, b, c, q, p)
+
+
+def check_sample(pool, n):
+    """Definition 19 as coded here against exact nim cycles beyond Manabe's box."""
+    rng, sample = random.Random(1), []
+    while len(sample) < n:
+        b = rng.randint(41, 250)
+        a = rng.randint(2, b - 1)
+        m = a + b
+        c = rng.randint(b + 1, 4 * m - 1)
+        if c != m and gcd(gcd(a, b), c) == 1 and any(x >> (c % m) & 1 for x in admissible(a, b)):
+            sample.append((a, b, c))
+    list(pool.imap_unordered(sample_task, sample, chunksize=8))
+    return (f"{n:,} random admissible primitive non-additive triples, 40 < b <= 250, b < c < 4m: "
+            "exact nim cycles pure with least period = least admissible")
 
 
 def transfer_task(args):
@@ -295,12 +310,13 @@ def check_certificates(pool, bmax, recheck):
     return total
 
 
-def check_paper_numbers():
+def check_paper_text(full):
     with open(os.path.join(HERE, "paper.tex"), encoding="utf-8") as f:
         text = f.read()
     for key, value in CLAIMS.items():
         assert f"{value:,}".replace(",", "{,}") in text, ("paper.tex lacks", key, value)
-    return f"paper.tex states the {len(CLAIMS)} computed counts"
+    return (f"paper.tex contains the {len(CLAIMS)} counts of CLAIMS as strings; recomputed above: "
+            + ("all six" if full else "the two box counts (the four b <= 250 counts need --full)"))
 
 
 def main():
@@ -324,6 +340,8 @@ def main():
         t = time.time()
         report("Lemma 4.1 (transfer)", check_transfer(pool, 60 if full else 30), t)
         t = time.time()
+        report("Definition 19 beyond the box", check_sample(pool, 2000), t)
+        t = time.time()
         total = check_certificates(pool, bmax, (3,) if full else (3, 4))
     scope = "all" if full else "subset:"
     report("Lemma 3.1 and Prop 5.1 angle sets",
@@ -339,7 +357,7 @@ def main():
            f"{scope} b <= {bmax}: {total['short_covered']:,} admissible triples, "
            f"{total['short_witnessed']:,} non-admissible triples each with a witness", t)
     t = time.time()
-    report("paper numbers", check_paper_numbers(), t)
+    report("paper text", check_paper_text(full), t)
     print(f"ALL PASS ({'full' if full else 'default'} mode, {time.time() - start:.1f}s, "
           f"{os.cpu_count()} processes, Python {sys.version.split()[0]})")
 
