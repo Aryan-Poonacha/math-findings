@@ -142,7 +142,7 @@ def admissible(a, b):
 def check_generators():
     """Bit-parallel P-positions agree with per-position mex zero sets."""
     n = 0
-    for a in range(1, 30):
+    for a in range(1, 39):
         for b in range(a + 1, 40):
             for c in range(b + 1, 41):
                 length = 3 * c + 7
@@ -150,7 +150,7 @@ def check_generators():
                 g = nim_values((a, b, c), length)
                 assert all((bits >> x & 1) == (g[x] == 0) for x in range(length)), (a, b, c)
                 n += 1
-    return f"bit-parallel recurrence = mex zero set on {n:,} triples with c <= 40"
+    return f"bit-parallel recurrence = mex zero set on all {n:,} triples a < b < c <= 40"
 
 
 def check_box():

@@ -193,9 +193,10 @@ The entries of Table~\ref{tab:blocks} are computed from the definitions by
 listing the at most $2^{10}$ subsets of $V(F_i)$. In each row the two values
 have the same sign, so both sides of \eqref{eq:ten} have the same sign. Reading
 prime exponents off the table, with multiplicities $c_i$: the exponent of $3$ is
-$\TenThree$ on both sides (every left entry except row~3 contributes one factor
-$3$, and $\sum_{i\ne 3}c_i=44$); the exponent of $2$ is $\TenTwo$ and the
-exponent of $5$ is $\TenFive$ on both sides; and each other prime appearing
+$\TenThree$ on both sides (on the right from $9^{22}=3^{44}$ alone; on the left
+every entry except row~3 contributes one factor $3$, and $\sum_{i\ne 3}c_i=44$);
+the exponent of $2$ is $\TenTwo$ and that of $5$ is $\TenFive$ on both sides, the
+left side counting the factor $2^{21}5^{21}$ of $10^{21}$; and each other prime appearing
 in Table~\ref{tab:blocks} has the same total exponent on the two sides. Hence
 \eqref{eq:ten} holds and $D(G_{10},-10)=0$. By Table~\ref{tab:residues},
 $D'(G_{10},-10)\equiv 912\pmod{1009}$, so the root is simple.
@@ -337,8 +338,8 @@ with the same C code.
 \item Is every negative even integer a domination root of some graph? The
   first case not settled here is $-12$.
 \item What are the least orders of graphs with domination roots $-6$, $-8$ and
-  $-10$? By Remark~\ref{rem:small} and \cite{MA26} they lie in $[12,31]$,
-  $[12,83]$ and $[12,373]$.
+  $-10$? By Remark~\ref{rem:small} they are at least $12$; the graphs of
+  \cite{MA26} and Theorem~\ref{thm:ten} bound them by $31$, $83$ and $373$.
 \end{enumerate}
 
 \section*{Acknowledgements}

@@ -85,7 +85,12 @@ $c\ge2(a+b)$, that a purely periodic $G_S$ with least period $p\le a+b$ has
 $\rho\in\Th{a+b}$ (his Proposition~55).
 \item S.~Zhang~\cite[Prop.~3.1]{SZhang} determined the pre-period and period on the line
 $b=2a$; with Theorem~34 this proves Conjecture~52 there~\cite[\S6]{Manabe}. He also
-classified $b=a+1$, where every angle is admissible~\cite[Prop.~4.1]{SZhang}.
+classified $b=a+1$, where every angle is admissible~\cite[Prop.~4.1]{SZhang}. His
+Theorem~6.3~\cite{SZhang}, as cited in~\cite[\S6]{Manabe}, gives three families with
+eventual period~$2$ for odd $a\ge3$ and $t\ge1$: $\{a,a+2,(2a+2)t+1\}$,
+$\{a,2a-1,(3a-1)t+a-2\}$ and $\{a,2a+1,(3a+1)t-1\}$; they are not purely periodic, which
+proves Conjecture~52 for them. For $b=a+2$ with $a$ odd the only non-admissible angle is
+$\rho=1$, so Conjecture~52 holds on that whole line~\cite[\S6]{Manabe}.
 \item Mikl\'os and Post proved that moves larger than a pure outcome period are
 redundant~\cite[Prop.~2.9]{MP}.
 \item Moriwaki (10 June 2026) treated real parameters with $b\le 2a$. On his ``white
@@ -102,10 +107,11 @@ if $c\ge p+m-\gcd(p,m)$ \cite[Prop.~3.1]{Levinstein}, and reported a search of
 100{,}946{,}926 triples with bounded $c$ without counterexample. H.~Zhang (26 November 2026)~\cite{HZhang} gave a
 second proof of Conjecture~57, also with Lean.
 \item Exact nim-value words or period formulas are known for several families:
-$\{2,5,c\}$, $c\ne7$ \cite{Zeng}; $\{4,6,10k+1\}$ \cite{XZeng}; $\{2,b,2b-6\}$, $b\ge7$
-odd \cite{Jo}; primitive $\{a,4a,c\}$ \cite{A4AC}; $\{a,3a-1,c\}$ and $\{6,17,119+23k\}$
-\cite{Brink1,Brink2}; $\{6,17,c\}$, $c\ge116$ \cite[Thm.~12]{Pan}; $\{3,8,11k+7\}$
-\cite{CL} and $\{3,8,11k+1\}$ \cite{CL1}. They give more than pure periodicity. For
+$\{2,5,c\}$, $c>5$, $c\ne7$ \cite{Zeng}; $\{4,6,10k+1\}$, $k\ge1$ \cite{XZeng};
+$\{2,b,2b-6\}$, $b\ge7$ odd \cite{Jo}; $\{a,4a,c\}$, $a\ge2$, $c>4a$, $\gcd(a,c)=1$
+\cite{A4AC}; $\{a,3a-1,c\}$, $a\ge3$, $c>(a-1)(4a-1)$ \cite{Brink1}; $\{6,17,119+23k\}$,
+$k\ge0$ \cite{Brink2}; $\{6,17,c\}$, $c\ge116$ \cite[Thm.~12]{Pan}; $\{3,8,11k+7\}$
+\cite{CL} and $\{3,8,11k+1\}$ \cite{CL1}, $k\ge1$. They give more than pure periodicity. For
 Conjecture~52 alone, the members with $b\le250$ fall under Theorem~\ref{thm:250}: for
 example, the non-admissible games $\{4,6,10k+1\}$ ($\rho=1<\delta=2$, also
 Theorem~\ref{thm:band}), $\{3,8,11k+1\}$ ($\rho=1$) and the ten non-admissible residue
@@ -114,7 +120,7 @@ classes of $\{6,17,c\}$.
 
 \subsection{Results}
 Only necessity is new; sufficiency is Manabe's Theorem~34. Theorem~\ref{thm:band} proves
-Conjecture~52 for every $b\le2a$ (the line $b=2a$ was known), and Theorem~\ref{thm:250}
+Conjecture~52 for every $b\le2a$ (the lines $b=2a$ and, for odd $a$, $b=a+2$ were known), and Theorem~\ref{thm:250}
 for every $b\le250$ (computer-assisted). Proposition~\ref{prop:cb} excludes periods
 $p\le c+b$ when $c\ge2b$ and $\rho$ is not admissible. Conjecture~52 remains open for $b>\max(2a,250)$, and
 Conjecture~56 remains open.
@@ -153,24 +159,25 @@ periodic and its least period is the least admissible candidate.
 So Conjecture~52 holds for a given $S$ as soon as we know that $G_S$ is not purely periodic
 when $\rho$ is not admissible.
 
-\begin{theorem}[{Levinstein~\cite[Thm.~1.1]{Levinstein}; H.~Zhang~\cite{HZhang}}]\label{thm:57}
+\begin{theorem}[{Levinstein~\cite[Thm.~1.1]{Levinstein}; H.~Zhang~\cite[Thm.~2 and \S4]{HZhang}}]\label{thm:57}
 Let $P\in\{a+b,c+a,c+b\}$. If $Y$ is periodic from $0$ with period $P$, then
 $\rho\in\Th{P}$.
 \end{theorem}
 
-\begin{lemma}[Move deletion; {\cite[Prop.~2.9]{MP}} and {\cite[Prop.~25]{Manabe}}]\label{lem:deletion}
+\begin{lemma}[Move deletion; {\cite[Prop.~2.9]{MP}}, {\cite[\S3]{HZhang}}, {\cite[Thm.~1.1(1)]{Levinstein}} and {\cite[Prop.~25]{Manabe}}]\label{lem:deletion}
 If $Y$ is periodic from $0$ with a period $p\le c$, then $W_0(S)=W_0(B)$ and
 $\rho\in\Th{a+b}$.
 \end{lemma}
 
 \begin{proof}
-The first assertion is essentially~\cite[Prop.~2.9]{MP}; we include the short argument. Put
+The first assertion is essentially~\cite[Prop.~2.9]{MP}; H.~Zhang~\cite[\S3]{HZhang} gives
+the same argument for every period $p\le\max(c,a+b)$. We include the short argument. Put
 $W=W_0(S)$. By uniqueness~\cite[Lemma~4]{Manabe} for $B$, it suffices to show that $x\in W$ if and only if $x-s\notin W$ for
 each $s\in\{a,b\}$ with $s\le x$. The forward implication holds by~\eqref{eq:rec}. For the
 converse let $x\notin W$ and write $x=j+ip$ with $0\le j<p$. Then $j\notin W$, and the move
 $c$ is not legal at $j<p\le c$, so $j-s\in W$ for some $s\in\{a,b\}$ with $s\le j$; by
 periodicity $x-s\in W$. Finally $W_0(S)=W_0(B)$ implies
-$\rho\in\Th{a+b}$~\cite[Prop.~25]{Manabe}.
+$\rho\in\Th{a+b}$~\cite[Prop.~25]{Manabe}, \cite[Thm.~1.1(1)]{Levinstein}.
 \end{proof}
 
 The following lemma gives the non-periodicity proofs of Theorems~\ref{thm:band}
@@ -399,7 +406,8 @@ Note $c\ge2b>a+b$. If $b\le2a$, Lemma~\ref{lem:angles} and Theorem~\ref{thm:band
 $Y$ has period $p\le c+b$ from~$0$. If $p\le c$, Lemma~\ref{lem:deletion} gives
 $\rho\in\Th{a+b}$, a contradiction. So $c<p\le c+b$; put $d=p-c\in[1,b]$.
 
-No two P-positions differ by $d$ (compare~\cite[Lemma~2.3]{Levinstein}): if $Y(x)=Y(x+d)=1$, then $Y(x+p)=1$ and
+No two P-positions differ by $d$ (for P-positions in $[0,p)$ this is the case $s=c$
+of~\cite[Lemma~2.3]{Levinstein}): if $Y(x)=Y(x+d)=1$, then $Y(x+p)=1$ and
 $(x+p)-(x+d)=c$, contradicting~\eqref{eq:rec}. Let $z_0\in\Z$. Then $z_0<b$ and
 $z_0+d<2b\le c$, so $Y(z_0)=z(z_0)=1$ and $Y(z_0+d)=z(z_0+d)$ by~\eqref{eq:below}. Hence
 $(z_0+d)\bmod m\notin\Z$ for every $z_0\in\Z$, that is, $\Z\cap(\Z+d)=\varnothing$ and
@@ -432,7 +440,7 @@ hand-proved results they are finite-range tests only.
 \toprule
 Check & default & \texttt{--full}\\
 \midrule
-Bit-parallel recurrence equals the mex rule, $0\le x<3c+7$ & \multicolumn{2}{l}{$a<b<c\le40$}\\
+Bit-parallel recurrence equals the mex rule, $0\le x<3c+7$ & \multicolumn{2}{l}{all 9{,}880 triples $a<b<c\le40$}\\
 Manabe's box, primitive non-additive, $2\le a\le8$, $b\le40$, $c\le100$: exact nim cycles
 match the criterion (7{,}557 pure, 7{,}828 not); a witness, with $0\le y<5c-m$, in every
 non-pure game and in no pure one & \multicolumn{2}{l}{all}\\
@@ -545,9 +553,10 @@ X.~Zeng, \emph{Exact preperiod on the even boundary family $\{4,6,10K+1\}$}, man
 \texttt{f3ae144}, \texttt{BigWIN2/BW2-B65-P01}, accessed 27 November 2026.
 
 \bibitem{Zeng}
-Z.~Zeng, \emph{Pure periodicity for the three-move subtraction games $\{2,5,c\}$}, Zenodo,
+X.~Zeng, \emph{Pure periodicity for the three-move subtraction games $\{2,5,c\}$}, Zenodo,
 8 September 2026,
-\href{https://doi.org/10.5281/zenodo.22661435}{doi:10.5281/zenodo.22661435}.
+\href{https://doi.org/10.5281/zenodo.22661435}{doi:10.5281/zenodo.22661435}; author as on
+the title page (Xiaojian Zeng), the Zenodo record lists the creator as Zijian Zeng.
 
 \bibitem{HZhang}
 H.~Zhang, \emph{Pair-sum periods in three-move subtraction games}, manuscript with Lean

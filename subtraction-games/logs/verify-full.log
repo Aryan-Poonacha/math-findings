@@ -1,15 +1,15 @@
 # $ time python3 -B verify.py --full    (2026-11-27, Linux x86_64, 16 logical CPUs)
-PASS definitions: bit-parallel recurrence = mex zero set on 9,715 triples with c <= 40 [0.4s]
-PASS consistency with Manabe Thm 34: Manabe's box: 7,557 admissible pure with least period = least admissible, 7,828 non-admissible not pure, each with a Lemma 2.4 witness; no witness in any pure game [2.3s]
+PASS definitions: bit-parallel recurrence = mex zero set on all 9,880 triples a < b < c <= 40 [0.4s]
+PASS consistency with Manabe Thm 34: Manabe's box: 7,557 admissible pure with least period = least admissible, 7,828 non-admissible not pure, each with a Lemma 2.4 witness; no witness in any pure game [2.4s]
 PASS Theorem 3.2 (b <= 2a): witness y = km-a-1, s = c on 31,980 cases (a <= 40, k = 1,2,3) [0.2s]
 PASS Lemma 4.1 (transfer): Y(c+j), Y(2c+j), -m <= j < 2m, identical for k = 2..5 on all 107,970 classes (a,b,r) with 1 <= a < b <= 60 [1.0s]
 PASS Definition 19 beyond the box: 2,000 random admissible primitive non-additive triples, 40 < b <= 250, b < c < 4m: exact nim cycles pure with least period = least admissible [1.3s]
-PASS Lemma 3.1 and Prop 5.1 angle sets: Theta formulas for b <= 2a, Theta_(a+b) = {a,b} or Theta_(c+b) = Z/m for b > 2a, every 2 <= a < b <= 250 [28.3s]
-PASS Theorem 4.2, c >= 2m: all b <= 250: 3,902,781 admissible primitive classes, 2,568,108 non-admissible classes each with a witness at c0 = 2m+r, -m <= j < m; 2,568,108 witnesses rechecked directly at k = 3 [28.3s]
-PASS Theorem 4.2, b < c < 2m: all b <= 250: 5,579,832 admissible triples, 3,020,764 non-admissible triples each with a witness [28.3s]
+PASS Lemma 3.1 and Prop 5.1 angle sets: Theta formulas for b <= 2a, Theta_(a+b) = {a,b} or Theta_(c+b) = Z/m for b > 2a, every 2 <= a < b <= 250 [29.3s]
+PASS Theorem 4.2, c >= 2m: all b <= 250: 3,902,781 admissible primitive classes, 2,568,108 non-admissible classes each with a witness at c0 = 2m+r, -m <= j < m; 2,568,108 witnesses rechecked directly at k = 3 [29.3s]
+PASS Theorem 4.2, b < c < 2m: all b <= 250: 5,579,832 admissible triples, 3,020,764 non-admissible triples each with a witness [29.3s]
 PASS paper text: paper.tex contains the 6 counts of CLAIMS as strings; recomputed above: all six [0.0s]
-ALL PASS (full mode, 33.5s, 16 processes, Python 3.12.3)
+ALL PASS (full mode, 34.7s, 16 processes, Python 3.12.3)
 
-real	0m33.504s
-user	7m35.011s
-sys	0m2.478s
+real	0m34.719s
+user	7m41.088s
+sys	0m2.907s
