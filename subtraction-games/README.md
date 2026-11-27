@@ -1,6 +1,6 @@
 # Manabe's pure-periodicity criterion for three-move subtraction games
 
-Paper: [paper.pdf](paper.pdf) (source [paper.tex](paper.tex)). Not peer reviewed; AI use is acknowledged in the paper.
+Paper: [paper.pdf](paper.pdf) (source [paper.tex](paper.tex)). Archived at [doi:10.5281/zenodo.24606431](https://doi.org/10.5281/zenodo.24606431). Not peer reviewed; AI use is acknowledged in the paper.
 
 Setting: the subtraction game S = {a, b, c} with 2 ≤ a < b < c, gcd(a, b, c) = 1, c ≠ a + b, and Manabe's angle tests on ρ = c mod (a + b) ([arXiv:2609.05358v2](https://arxiv.org/abs/2609.05358v2), Conjecture 52). Sufficiency of the tests is Manabe's Theorem 34; the new part is necessity.
 

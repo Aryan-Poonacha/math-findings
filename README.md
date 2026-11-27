@@ -1,6 +1,8 @@
 # math-findings
 
-Short research notes on open problems in combinatorics, each with a full proof and a verifier that recomputes every computer-assisted claim.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24606431.svg)](https://doi.org/10.5281/zenodo.24606431)
+
+Short research notes on open problems in combinatorics, each with a full proof and a verifier that recomputes every computer-assisted claim. Archived at [doi:10.5281/zenodo.24606431](https://doi.org/10.5281/zenodo.24606431) (concept DOI: [10.5281/zenodo.24606430](https://doi.org/10.5281/zenodo.24606430)).
 
 | Note | New results | Paper | Default check (fast) | Full check |
 |---|---|---|---|---|
